@@ -64,27 +64,34 @@ const SignupForm = () => {
     
 
   return (
-    <div className='text-center'>
-        <div>
-            <h1>Easels AI</h1>
-            <p>AI art by the people, for the people.</p>
+    <div className='border border-slate-300 p-5 pr-10 pl-10 justify-end rounded-xl'>
+        <div className='text-slate-300'>
+            <h1 className='text-slate-300 text-4xl text-center font-sans mb-2'>Easels  AI</h1>
+            <p className='text-xs text-center '>AI art by the people, for the people.</p>
         </div>
-        <div>
-            <h2>Sign Up</h2>
-            <div>
+        <div className='p-3 text-slate-300'>
+            <h2 className='text-lg mb-1 text-center'>Sign Up</h2>
+            <div className=''>
             <form onSubmit={handleSubmit}>
-            <p>Name:</p>
+            <p className='text-sm'>Name:</p>
             <input onChange={(e) => setName(e.target.value)}
              type="text" 
-             placeholder='Enter Name' />
+             placeholder='Enter Name'
+             className='bg-transparent border rounded-lg mt-1 mb-3 p-1 pl-3 text-sm w-full' />
 
-            <p>Email:</p>
-            <input onChange={(e) => setEmail(e.target.value)} type="email" name="name" placeholder='Enter Email' />
-            <p>Password:</p>
-            <input onChange={(e) => setPassword(e.target.value)} type="password" name="name" placeholder='Enter Password' />
+            <p className='text-sm'>Email:</p>
+            <input onChange={(e) => setEmail(e.target.value)} 
+            type="email" name="name" 
+            placeholder='Enter Email'
+            className='bg-transparent border rounded-lg mt-1 mb-3 p-1 pl-3 text-sm ' />
+            <p className='text-sm'>Password:</p>
+            <input onChange={(e) => setPassword(e.target.value)} 
+            type="password" name="name" 
+            placeholder='Enter Password'
+            className='bg-transparent border rounded-lg mt-1 mb-3 p-1 pl-3 text-sm ' />
 
-            <div>
-            <button className='bg-white text-black mt-10'>Sign up</button>
+            <div className='text-center flex items-center justify-center mt-5'>
+            <button className='bg-pink-600 p-1 pr-2 pl-2 text-slate-300 rounded-lg'>Sign up</button>
             {error && (
             <div>
             {error}
@@ -96,9 +103,8 @@ const SignupForm = () => {
             </div>
         </div>
 
-        <div>
-            <h3>Already have an account?</h3>
-            <Link href="/login">Login</Link>
+        <div className='text-sm text-slate-300 mt-1 text-center'>
+            <h3>Already have an account? <Link href="/login" className='text-blue-500'>Login</Link> </h3>
 
         </div>
     </div>
