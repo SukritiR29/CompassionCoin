@@ -5,8 +5,8 @@ const page = () => {
   const backgroundImageUrl = 'url("/landing.png")';
 
   return (
-<div className="hero min-h-screen flex items-center justify-end" style={{backgroundImage: backgroundImageUrl, backgroundSize: 'cover'}}>
-  <div className="hero-overlay bg-opacity-60"></div>
+<div className="hero min-h-screen flex items-center justify-end bg-black" style={{backgroundImage: backgroundImageUrl, backgroundSize: 'cover'}}>
+  <div className="hero-overlay"></div>
   <div className="hero-content">
     <div className="max-w-md">
     <div className='max-h-screen'>

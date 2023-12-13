@@ -7,8 +7,6 @@ import UserInfo from '@/components/userInfo'
 const page = () => {
 
   const { data:session } = useSession();
-
-
   return (
     <div>
       <div>
