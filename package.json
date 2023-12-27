@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.15.0",
+    "@xenova/transformers": "^2.10.1",
     "bcryptjs": "^2.4.3",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.21.0",
     "react": "^18",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
     "react-icons": "^4.12.0"
   },

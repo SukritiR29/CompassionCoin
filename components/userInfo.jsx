@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 const UserInfo = () => {
   return (
-    <div>
-        <h1>User Info</h1>
+    <div className='text-sm'>
         <Link href={'/login'}>
         <button onClick={() => signOut()}>Log Out</button>
         </Link>

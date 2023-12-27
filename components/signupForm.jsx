@@ -66,7 +66,7 @@ const SignupForm = () => {
     
 
   return (
-    <div className='border border-slate-500 p-5 pr-10 pl-10 justify-end rounded-xl'>
+    <div className=' p-5 pr-10 pl-10 justify-end rounded-xl bg-slate-900 bg-opacity-50'>
         <div className='text-slate-300'>
             <h1 className='text-slate-300 text-4xl text-center font-sans mb-2'>Easels  AI</h1>
             <p className='text-xs text-center '>AI art by the people, for the people.</p>
