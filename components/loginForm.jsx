@@ -10,6 +10,7 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("")
     const [error, setError] = useState("");
 
     const router = useRouter();
@@ -20,6 +21,7 @@ const LoginForm = () => {
            const res =  await signIn("credentials", {
                 email,
                  password,
+                 role,
                  redirect:false,
             })
 
@@ -44,7 +46,7 @@ const LoginForm = () => {
         <h2 className='text-lg text-center'>Log In</h2>
         </div>
         <form onSubmit={handleSubmit}>
-        <div className='pr-3 pl-3 pb-4 text-slate-300'>
+        <div className='pr-3 pl-3 text-slate-300'>
             <div>
             <p className='text-sm'>Email:</p>
             <input onChange={(e) => setEmail(e.target.value)} 
@@ -57,9 +59,34 @@ const LoginForm = () => {
             placeholder='Enter Password'
             className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-2 pr-20 text-sm ' />
             </div>
+            <p className='text-sm text-slate-300'>Join as:</p>
+            <div className='flex gap-5 mt-1'>
+            <div>
+                <input
+                    type="radio"
+                    id="admin"
+                    name="role"
+                    value="Admin"
+                    onChange={(e) => setRole(e.target.value)}
+                />
+                <label htmlFor="admin" className='text-sm'>Admin</label>
+            </div>
+            <div>
+                <input
+                    type="radio"
+                    id="user"
+                    name="role"
+                    value="User"
+                    onChange={(e) => setRole(e.target.value)}
+                />
+                <label htmlFor="user" className='text-sm'>User</label>
+            </div>
+
+            </div>
         </div>
-        <div className='text-center flex items-center justify-center mt-1 mb-3'>
-            <button className='bg-pink-600 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-sm'>Login</button>
+
+        <div className='text-center flex items-center justify-center'>
+            <button className='bg-pink-600 mt-8 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-sm'>Login</button>
         </div>
         <div className='flex justify-center'>
         {error && (
@@ -71,7 +98,7 @@ const LoginForm = () => {
         </div>
 
       </form>
-        <div className='text-sm text-slate-300 mt-10 text-center'>
+        <div className='text-sm text-slate-300 mt-4 text-center'>
             <h3 className=''>Do not have an account? <Link href={'/'} className='text-blue-500'> Register </Link> </h3>
         </div>
     </div>
