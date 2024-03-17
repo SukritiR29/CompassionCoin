@@ -37,8 +37,8 @@ const LoginForm = () => {
   return (
     <div className='p-5 pr-10 pl-10 justify-end rounded-xl bg-slate-900 bg-opacity-50'>
         <div className='text-slate-300'>
-            <h1 className='text-slate-300 text-4xl text-center font-sans mb-2'>Easels AI</h1>
-            <p className='text-xs text-center '>AI art by the people, for the people.</p>
+            <h1 className='text-slate-300 text-4xl text-center font-sans mb-2'>Compassion Coin</h1>
+            {/* <p className='text-xs text-center '>AI art by the people, for the people.</p> */}
         </div>
         <div  className='p-3 text-slate-300'>
         <h2 className='text-lg text-center'>Log In</h2>
@@ -50,12 +50,12 @@ const LoginForm = () => {
             <input onChange={(e) => setEmail(e.target.value)} 
             type="email" name="name" 
             placeholder='Enter Email'
-            className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-1 pl-3 text-sm ' />
+            className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-2 pr-20 text-sm ' />
             <p className='text-sm mt-3'>Password:</p>
             <input onChange={(e) => setPassword(e.target.value)} 
             type="password" name="name" 
             placeholder='Enter Password'
-            className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-1 pl-3 text-sm ' />
+            className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-2 pr-20 text-sm ' />
             </div>
         </div>
         <div className='text-center flex items-center justify-center mt-1 mb-3'>

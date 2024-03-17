@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useSession  } from 'next-auth/react'
 import UserInfo from '@/components/userInfo'
 import Canvas from '../../components/canvas'
+import DesignPanel from '@/components/designPanel'
+import CodeProvider from '@/components/codeProvider'
 
 
 const page = () => {
@@ -35,8 +37,10 @@ const page = () => {
         </details>
         </div>
       </div>
-      <div>
+      <div className='flex gap-5 w-screen'>
+      <DesignPanel/>
       <Canvas/>
+      <CodeProvider/>
     </div>
     </div>
   )

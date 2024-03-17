@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import DraggableButton from './DraggableButton'
+import DraggableButton from './DesignComponents/DraggableButton'
 
 
 const Canvas = () => {
