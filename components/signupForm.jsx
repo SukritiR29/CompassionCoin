@@ -57,7 +57,7 @@ const SignupForm = () => {
            if(res.ok) {
             const form = e.target;
             form.reset();
-            router.push("/dashboard")
+            router.push("/login")
            } else {
             console.log("Registration failed.");
            }
@@ -105,7 +105,7 @@ const SignupForm = () => {
                     value="Admin"
                     onChange={(e) => setRole(e.target.value)}
                 />
-                <label htmlFor="admin">Admin</label>
+                <label htmlFor="admin" className='text-sm'>Admin</label>
             </div>
             <div>
                 <input
@@ -115,7 +115,7 @@ const SignupForm = () => {
                     value="User"
                     onChange={(e) => setRole(e.target.value)}
                 />
-                <label htmlFor="user">User</label>
+                <label htmlFor="user" className='text-sm'>User</label>
             </div>
 
             </div>
