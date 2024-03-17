@@ -10,8 +10,13 @@ const authOptions = {
       name: "credentials",
       credentials: {},
 
+<<<<<<< HEAD
       async authorize(credentials) {
         const { email, password, role } = credentials;
+=======
+            async authorize(credentials) {
+                const { email, password, role} = credentials;
+>>>>>>> 068aadefba426f630a77e9f859c7d63d1ce837c0
 
         try {
           await connectMongoDB();
