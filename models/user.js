@@ -15,7 +15,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-<<<<<<< HEAD
     role: {
         type: String,
         enum: ["Admin", "User"],
@@ -23,16 +22,7 @@ const userSchema = new Schema(
       },
 },
 { timestamps: true}
-=======
 
-    role: {
-      type: String,
-      enum: ["Admin", "User"],
-      default: "User",
-    },
-  },
-  { timestamps: true }
->>>>>>> 2db4622c6b3ff770f8ab60bbadd494adcc892b58
 );
 
 const User = models.User || mongoose.model("User", userSchema);
