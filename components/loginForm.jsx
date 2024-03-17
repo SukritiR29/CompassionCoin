@@ -25,16 +25,20 @@ const LoginForm = () => {
                  redirect:false,
             })
 
-            if(res.error) {
-                setError("Invalid Credentials");
-                return;
+            if (!result.error) {
+                if (role === 'admin') {
+                    router.push('/dashboard/adminPortal'); // Redirect admin to admin portal
+                } else {
+                    router.push('/dashboard/userPortal'); // Redirect user to user portal
+                }
+            } else {
+                // Handle login error
+                console.error('Login error:', result.error);
             }
-
-        router.replace("dashboard");
         } catch (error) {
-            console.log(error);
+            console.error('Login failed:', error);
         }
-    }
+    };
 
   return (
     <div className='p-5 pr-10 pl-10 justify-end rounded-xl bg-slate-900 bg-opacity-50'>
