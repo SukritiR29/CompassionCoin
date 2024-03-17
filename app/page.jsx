@@ -2,6 +2,7 @@ import React from 'react'
 import SignupForm from '@/components/signupForm'
 const page = () => {
 
+
   const backgroundImageUrl = 'url("/office.jpeg")';
 
   const containerStyle = {
