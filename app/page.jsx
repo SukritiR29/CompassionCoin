@@ -2,7 +2,7 @@ import React from 'react'
 import SignupForm from '@/components/signupForm'
 const page = () => {
 
-  const backgroundImageUrl = 'url("/landing.png")';
+  const backgroundImageUrl = 'url("/office.jpeg")';
 
   return (
 <div className="hero min-h-screen flex items-center justify-end bg-black" style={{backgroundImage: backgroundImageUrl, backgroundSize: 'cover'}}>
