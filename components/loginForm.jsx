@@ -23,9 +23,9 @@ const LoginForm = () => {
             if (!result.error) {
                 // Redirect based on user's role
                 if (role === 'admin') {
-                    router.push('/dashboard/adminPortal'); // Redirect admin to admin portal
+                    router.push('/AdminPortal'); // Redirect admin to admin portal
                 } else {
-                    router.push('/dashboard/userPortal'); // Redirect user to user portal
+                    router.push('/UserPortal'); // Redirect user to user portal
                 }
             } else {
                 // Handle login error
