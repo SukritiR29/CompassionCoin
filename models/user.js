@@ -16,14 +16,29 @@ const userSchema = new Schema(
       required: true,
     },
     role: {
-        type: String,
-        enum: ["Admin", "User"],
-        default: "User",
-      },
-},
-{ timestamps: true}
+      type: String,
+      enum: ["Admin", "User"],
+      default: "User",
+    },
 
-)
+    appliedOffer: [
+      {
+        offerId: {
+          type: Schema.Types.ObjectId,
+          ref: "Offer",
+        },
+  
+        status: {
+          type: String,
+          enum: ["pending", "accepted", "rejected"],
+          default: "pending",
+        },
+      },
+
+    ] 
+  },
+  { timestamps: true }
+);
 
 const User = models.User || mongoose.model("User", userSchema);
 export default User;
