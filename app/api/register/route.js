@@ -4,12 +4,17 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
-    try {
-        const {name, email, password, role } = await req.json();
-        const hashedPassword = await bcrypt.hash(password, 10);
-        await connectMongoDB();
-        await User.create({name, email, password: hashedPassword, role});
- 
+  try {
+    const { name, email, password, role } = await req.json();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await connectMongoDB();
+    await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      appliedOffers: [],
+    });
 
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {
