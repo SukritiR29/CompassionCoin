@@ -52,8 +52,8 @@ const LoginForm = () => {
                         <input onChange={(e) => setEmail(e.target.value)} type="email" name="name" placeholder='Enter Email' className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-2 pr-20 text-sm' />
                         <p className='text-sm'>Password:</p>
                         <input onChange={(e) => setPassword(e.target.value)} type="password" name="name" placeholder='Enter Password' className='bg-transparent border border-slate-400 rounded-lg mt-1 mb-3 p-2 pr-20 text-sm' />
-                        <p className='text-sm'>Join as:</p>
-                        <div className='flex gap-5'>
+                        <p className='text-sm mt-2'>Join as:</p>
+                        <div className='flex gap-5 mt-2'>
                             <div>
                                 <input type="radio" id="admin" name="role" value="Admin" onChange={(e) => setRole(e.target.value)} />
                                 <label htmlFor="admin" className='text-sm'>Admin</label>
