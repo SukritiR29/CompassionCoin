@@ -1,14 +1,19 @@
-// api/admin.js
+// api/createOffer/route.js
 
 import { connectMongoDB } from "@/lib/mongodb";
 import Offer from "@/models/offer";
 import { NextResponse } from "next/server";
 
-export async function createOffer(req) {
+export async function POST(req) {
   try {
     const { adminId, offerName, offerDetails } = await req.json();
     await connectMongoDB();
-    await Offer.create({ adminId, offerName, offerDetails });
+    await Offer.create({ 
+      adminId, 
+      offerName, 
+      offerDetails,
+      offerPrize,
+    });
 
     return NextResponse.json({ message: "Offer created." }, { status: 201 });
   } catch (error) {
@@ -18,3 +23,4 @@ export async function createOffer(req) {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 
@@ -16,7 +16,7 @@ const AdminOffer = () => {
       const res = await fetch('/api/createOffer', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'offer/json', // Corrected Content-Type
           },
           body: JSON.stringify({
               offerName,
