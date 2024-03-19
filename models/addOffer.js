@@ -12,26 +12,19 @@ const offerSchema = new Schema(
       required: [true, "Firm name is required"],
     },
 
-    discription: {
+    description: {
       type: String,
-      required: [true, "Discription is required"],
+      required: [true, "Description is required"],
     },
 
     worth: {
       type: String,
       required: [true, "Worth is required"],
     },
-
-    adminId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
   },
   { timestamps: true }
 );
 
-const CreateOffer =
-  mongoose.models.CreateOffer || mongoose.model("CreateOffer", offerSchema);
+const AddOffer = mongoose.models.AddOffer || mongoose.model("AddOffer", offerSchema);
 
-export default CreateOffer;
+export default AddOffer;

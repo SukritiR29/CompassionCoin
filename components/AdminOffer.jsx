@@ -5,34 +5,38 @@ import React, { useState } from 'react';
 const AdminOffer = () => {
   const [offer, setOffer] = useState('');
   const [firm, setFirm] = useState('');
-  const [discription, setDiscription] = useState('');
+  const [description, setDescription] = useState('');
   const [worth, setWorth] = useState('');
   const [error, setError] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(offer);
-    console.log(firm);
-    console.log(discription);
-    console.log(worth);
 
-    const res = await fetch('api/createOffer', {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        offer,
-        firm,
-        discription,
-        worth,
-      }),
-    });
+    try {
+      const res = await fetch('api/createOffer', {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          offer,
+          firm,
+          description,
+          worth,
+        }),
+      });
 
-    const {msg} = await res.json();
-    setError(msg);
-    console.log(error);
+      if (!res.ok) {
+        throw new Error('Failed to add offer');
+      }
 
+      const { msg } = await res.json();
+      setError(msg);
+      console.log(msg); // Log the success message from the server
+    } catch (error) {
+      console.error(error); // Log any errors that occurred during the fetch request
+      setError(['An error occurred while adding the offer']); // Update error state
+    }
   };
 
   return (
@@ -70,8 +74,8 @@ const AdminOffer = () => {
               Description
             </label>
             <input
-              onChange={(e) => setDiscription(e.target.value)}
-              value={discription}
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               placeholder="Description"
