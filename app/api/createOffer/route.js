@@ -1,14 +1,17 @@
 import { connectMongoDB } from '../../../lib/mongodb';
-import AddOffer from '../../../models/addOffer'
+import AddOffer from '../../../models/addOffer';
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { offer, firm, description, worth } = await req.json();
+  const { offer, userEmail, firm, description, worth } = await req.json();
+
+  // Add console log to check if userEmail is received correctly
+  console.log("Received userEmail:", userEmail);
 
   try {
     await connectMongoDB();
-
-    await AddOffer.create({ offer, firm, description, worth });
+    
+    await AddOffer.create({ offer, userEmail, firm, description, worth });
 
     return NextResponse.json({
       msg: ["Message sent successfully"],
