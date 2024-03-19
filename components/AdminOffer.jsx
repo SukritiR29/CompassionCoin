@@ -1,6 +1,9 @@
+
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+
 
 const AdminOffer = () => {
   const [offer, setOffer] = useState('');
@@ -9,8 +12,30 @@ const AdminOffer = () => {
   const [worth, setWorth] = useState('');
   const [error, setError] = useState([]);
 
+  const { data: session, status } = useSession();
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    console.log("Session:", session);
+      if (status === 'authenticated') {
+        console.log("User Email:", session.user.email);
+        setUserEmail(session.user.email);
+      }
+    }, [session, status]);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (userEmail !== session.user.email) {
+      console.error('Email validation failed');
+      setError(['Email validation failed']); // Update error state with validation error message
+      return;
+    }
+
+    console.log(offer);
+    console.log(firm);
+    console.log(userEmail);
 
     try {
       const res = await fetch('api/createOffer', {
@@ -19,6 +44,7 @@ const AdminOffer = () => {
           "Content-type": "application/json"
         },
         body: JSON.stringify({
+          userEmail,
           offer,
           firm,
           description,
@@ -55,6 +81,19 @@ const AdminOffer = () => {
               placeholder="Offer Title"
             />
           </div>
+         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Email:
+          </label>
+          <input
+            value={userEmail}
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="text"
+            placeholder="Email"
+            readOnly // Prevent users from editing the email field
+          />
+        </div>
+
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Firm Name
