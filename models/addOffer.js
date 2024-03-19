@@ -1,3 +1,4 @@
+
 import mongoose, { Schema } from "mongoose";
 
 const offerSchema = new Schema(
@@ -20,6 +21,12 @@ const offerSchema = new Schema(
     worth: {
       type: String,
       required: [true, "Worth is required"],
+    },
+
+    // Reference to the User document (after $lookup)
+    userEmail: {
+      type: String,
+      required: [true, "User email is required"],
     },
   },
   { timestamps: true }
