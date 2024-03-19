@@ -1,26 +1,31 @@
-// api/createOffer/route.js
-
 import { connectMongoDB } from "@/lib/mongodb";
-import Offer from "@/models/offer";
+import CreateOffer from "@/models/createOffer";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import User from "@/models/user";
 
 export async function POST(req) {
+  const { offer, firm, discription, worth, adminId } = await req.json();
+    
   try {
-    const { adminId, offerName, offerDetails } = await req.json();
     await connectMongoDB();
-    await Offer.create({ 
-      adminId, 
-      offerName, 
-      offerDetails,
-      offerPrize,
-    });
 
-    return NextResponse.json({ message: "Offer created." }, { status: 201 });
+    await CreateOffer.create({ offer, firm, discription, worth, adminId });
+
+    return NextResponse.json({
+      msg: ["Message sent successfully"],
+      success: true,
+    });
   } catch (error) {
-    return NextResponse.json(
-      { message: "An error occurred while creating the offer" },
-      { status: 500 }
-    );
+    if (error instanceof mongoose.Error.ValidationError) {
+      let errorList = [];
+      for (let e in error.errors) {
+        errorList.push(e.message);
+      }
+
+      return NextResponse.json({ msg: errorList });
+    } else {
+      return NextResponse.json(error);
+    }
   }
 }
-
