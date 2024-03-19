@@ -10,9 +10,7 @@ const AdminSide = () => {
     const [userName, setUserName] = useState('');
 
     useEffect(() => {
-        // Check if the user is authenticated
         if (status === 'authenticated') {
-          // Access the user's name from the session object and update the state
           setUserName(session.user.name);
         }
       }, [session, status]);
