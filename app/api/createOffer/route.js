@@ -1,17 +1,40 @@
-import { connectMongoDB } from '../../../lib/mongodb';
-import AddOffer from '../../../models/addOffer';
+import { connectMongoDB } from "../../../lib/mongodb";
+import AddOffer from "../../../models/addOffer";
 import { NextResponse } from "next/server";
 
+export async function GET(req) {
+  try {
+    await connectMongoDB();
+    const { userId } = req.query;
+
+    // Fetch all documents from the AddOffer collection
+    const offers = await AddOffer.find({ userId });
+
+    return NextResponse.json({
+      offers,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error fetching offers:", error);
+
+    return NextResponse.json(
+      { message: "An error occurred while fetching offers" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req) {
-  const { offer, userEmail, firm, description, worth } = await req.json();
+  const { offer, userEmail, firm, description, worth, userId } = await req.json();
 
   // Add console log to check if userEmail is received correctly
   console.log("Received userEmail:", userEmail);
+  console.log("User Id:", userId)
 
   try {
     await connectMongoDB();
-    
-    await AddOffer.create({ offer, userEmail, firm, description, worth });
+
+    await AddOffer.create({ offer, userEmail, firm, description, worth, userId });
 
     return NextResponse.json({
       msg: ["Message sent successfully"],
