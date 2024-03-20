@@ -1,8 +1,14 @@
 import React from 'react'
+import OfferList from '../../components/userOffer'
+
 
 const page = () => {
   return (
-    <div>User Portal</div>
+    <div className='bg-slate-900 h-max'>
+      <div>
+        <OfferList/>
+      </div>
+    </div>
   )
 }
 
