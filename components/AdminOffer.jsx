@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState, useEffect } from 'react';
@@ -11,6 +10,7 @@ const AdminOffer = () => {
   const [description, setDescription] = useState('');
   const [worth, setWorth] = useState('');
   const [error, setError] = useState([]);
+  const [user, setUser] = useState([]);
 
   const { data: session, status } = useSession();
   const [userEmail, setUserEmail] = useState('');
@@ -36,34 +36,75 @@ const AdminOffer = () => {
     console.log(offer);
     console.log(firm);
     console.log(userEmail);
-
+  
     try {
-      const res = await fetch('api/createOffer', {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-          userEmail,
-          offer,
-          firm,
-          description,
-          worth,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error('Failed to add offer');
+      // Fetch user data
+      const response = await fetch("/api/register");
+      const data = await response.json();
+      console.log("API Response:", data); 
+      if (data.success && data.currUser.length > 0) {
+        // Find the user document where the email matches the logged-in user's email
+        const currentUser = data.currUser.find(user => user.email === session.user.email);
+        if (currentUser) {
+          console.log("User ID:", currentUser._id); // Print the user ID in the console
+          setUser(currentUser._id);
+  
+          // Submit offer data along with user ID
+          const res = await fetch('api/createOffer', {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+              userEmail,
+              userId: currentUser._id, // Include currentUser._id in the request body
+              offer,
+              firm,
+              description,
+              worth,
+            }),
+          });
+  
+          if (!res.ok) {
+            throw new Error('Failed to add offer');
+          }
+  
+          const { msg } = await res.json();
+          setError(msg);
+          console.log(msg); // Log the success message from the server
+        } else {
+          console.error("User not found for email:", session.user.email);
+        }
+      } else {
+        console.error("Failed to fetch offers:", data.message);
       }
-
-      const { msg } = await res.json();
-      setError(msg);
-      console.log(msg); // Log the success message from the server
     } catch (error) {
       console.error(error); // Log any errors that occurred during the fetch request
       setError(['An error occurred while adding the offer']); // Update error state
     }
+
+    
   };
+
+  const [offers, setOffers] = useState([]);
+
+  useEffect(() => {
+    async function fetchOffers() {
+      try {
+        const response = await fetch("/api/getOffer");
+        const data = await response.json();
+        if (data.success) {
+          setOffers(data.offers);
+        } else {
+          console.error("Failed to fetch offers:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      }
+    }
+
+    fetchOffers();
+  }, []);
 
   return (
     <div className=''>
@@ -142,8 +183,27 @@ const AdminOffer = () => {
           </div>
         </div>
       </form>
+
+      <div className="border border-opacity-20 border-slate-200 rounded  w-1/2 p-2 m-4 ">
+            <h1 className='text-slate-300 text-3xl font-sans mb-2 pl-4'>Compassion Coin</h1>
+            <div className="">
+            <ul className="">
+        {offers.map((offer) => (
+          <li key={offer._id} className="border border-opacity-20 border-slate-200 rounded m-4 text-slate-200 ">
+            <h2>{offer.offer}</h2>
+            <p>{offer.description}</p>
+            <p>{offer.firm}</p>
+            <p>{offer.worth}</p>
+            <p>{offer.userEmail}</p>
+          </li>
+        ))}
+      </ul>
+            </div>
+     
+    </div>
     </div>
   );
 };
 
 export default AdminOffer;
+
