@@ -28,10 +28,16 @@ const offerSchema = new Schema(
       type: String,
       required: [true, "User email is required"],
     },
+
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, "User ID is required"],
+    },
   },
   { timestamps: true }
 );
-
+offerSchema.index({ userId: 1 });
 const AddOffer = mongoose.models.AddOffer || mongoose.model("AddOffer", offerSchema);
 
 export default AddOffer;
