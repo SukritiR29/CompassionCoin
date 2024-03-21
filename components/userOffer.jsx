@@ -28,12 +28,40 @@ function OfferList() {
 
   const handleSubmit = async (e, offerId) => {
     e.preventDefault();
-    console.log("Offer ID:", offerId);
-    console.log(name);
-    console.log(country);
-    console.log(exp);
-    console.log(approach);
-  }
+    try {
+      const response = await fetch("/api/submitApplications", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          offerId,
+          name,
+          country,
+          exp,
+          approach,
+        }),
+      });
+      if (response.ok) {
+        // Application submitted successfully, show success message
+        console.log("Application submitted successfully!");
+        setName("");
+        setCountry("");
+        setExp("");
+        setApproach("");
+      } else {
+        // Error occurred while submitting application
+        console.error("Failed to submit application:", response.statusText);
+        alert("Failed to submit application. Please try again later.");
+
+      }
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      alert("Error submitting application. Please try again later.");
+
+    }
+  };
+  
 
   useEffect(() => {
     async function fetchOffers() {
@@ -127,3 +155,4 @@ function OfferList() {
 }
 
 export default OfferList;
+
