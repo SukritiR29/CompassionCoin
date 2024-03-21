@@ -5,10 +5,9 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     await connectMongoDB();
-    const { userId } = req.query;
 
     // Fetch all documents from the AddOffer collection
-    const offers = await AddOffer.find({ userId });
+    const offers = await AddOffer.find({});
 
     return NextResponse.json({
       offers,
@@ -25,16 +24,24 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-  const { offer, userEmail, firm, description, worth, userId } = await req.json();
+  const { offer, userEmail, firm, description, worth, userId } =
+    await req.json();
 
   // Add console log to check if userEmail is received correctly
   console.log("Received userEmail:", userEmail);
-  console.log("User Id:", userId)
+  console.log("User Id:", userId);
 
   try {
     await connectMongoDB();
 
-    await AddOffer.create({ offer, userEmail, firm, description, worth, userId });
+    await AddOffer.create({
+      offer,
+      userEmail,
+      firm,
+      description,
+      worth,
+      userId,
+    });
 
     return NextResponse.json({
       msg: ["Message sent successfully"],
