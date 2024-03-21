@@ -5,6 +5,7 @@ import AdminSide from '@/components/AdminSide';
 import AdminOffer from '@/components/AdminOffer';
 import { useSession } from 'next-auth/react';
 import AdminDisplay from '@/components/AdminDisplay';
+import AdminApplication from '@/components/AdminApplication';
 
 
 const Page = () => {
@@ -29,11 +30,12 @@ const Page = () => {
           // Find the user document where the email matches the logged-in user's email
           const currentUser = data.currUser.find(user => user.email === session.user.email);
           if (currentUser) {
-            console.log("User ID:", currentUser._id); // Print the user ID in the console
+            console.log("From main:", currentUser._id); // Print the user ID in the console
             setUser(currentUser._id);
 
             // Fetch offers using the fetched user ID
-            const offerResponse = await fetch(`/api/getOffer?userId=${currentUser._id}`);
+            const offerResponse = await fetch(`/api/createOffer`);
+            
             if (!offerResponse.ok) {
               throw new Error(`Failed to fetch offers: ${offerResponse.statusText}`);
             }
@@ -70,6 +72,7 @@ const Page = () => {
     <div className='bg-slate-900 h-screen '>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4' />
+        <AdminApplication/>
         <div className="border border-opacity-20 border-slate-200 rounded  w-1/2 p-2 m-4 ">
             <h1 className='text-slate-300 text-3xl font-sans mb-2 pl-4'>Compassion Coin</h1>
             <div className="">
