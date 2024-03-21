@@ -27,15 +27,30 @@ const userSchema = new Schema(
           type: Schema.Types.ObjectId,
           ref: "Offer",
         },
-  
+        name: {
+          type: String,
+          required: true,
+        },
+        country: {
+          type: String,
+          required: true,
+        },
+        exp: {
+          type: String,
+          required: true,
+        },
+        approach: {
+          type: String,
+          required: true,
+        },
         status: {
           type: String,
           enum: ["pending", "accepted", "rejected"],
           default: "pending",
         },
       },
-
-    ] 
+    ]
+    
   },
   { timestamps: true }
 );
