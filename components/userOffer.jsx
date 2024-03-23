@@ -12,13 +12,15 @@ import {
   PopoverCloseButton,
   PopoverAnchor,
 } from '@chakra-ui/react'
+import { useSession } from 'next-auth/react';
 
-import { useDisclosure } from '@chakra-ui/react'
 
 
 function OfferList() {
   const [offers, setOffers] = useState([]);
-
+  const { data: session, status } = useSession();
+  const [useremail, setUserEmail] = useState([]);
+  const [sender, setSender] = useState([]);
   const initialFocusRef = React.useRef()
 
   const [name, setName] = useState("");
@@ -26,9 +28,44 @@ function OfferList() {
   const [exp, setExp] = useState("");
   const [approach, setApproach] = useState("");
 
+
+  useEffect(() => {
+    async function fetchOffers() {
+      try {
+        if(status === 'authenticated') {
+          console.log("User Email:", session.user.email);
+          setUserEmail(session.user.email);
+          const response = await fetch("/api/register");
+          const data = await response.json();
+          console.log("API Response:", data); 
+          if(data.success && data.currUser.length > 0) {
+            const currentUser = data.currUser.find(user => user.email === session.user.email);
+            if(currentUser){
+              console.log("From main:", currentUser._id); // Print the user ID in the console
+              setSender(currentUser._id);
+            }
+          }
+        }
+        const response = await fetch("/api/getOffer");
+        const data = await response.json();
+        if (data.success) {
+          setOffers(data.offers);
+        } else {
+          console.error("Failed to fetch offers:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      }
+    }
+
+    fetchOffers();
+  }, [status, session]);
+
+
   const handleSubmit = async (e, offerId) => {
     e.preventDefault();
     try {
+    
       const response = await fetch("/api/submitApplications", {
         method: "POST",
         headers: {
@@ -40,11 +77,13 @@ function OfferList() {
           country,
           exp,
           approach,
+          sender,  
         }),
       });
       if (response.ok) {
         // Application submitted successfully, show success message
         console.log("Application submitted successfully!");
+        console.log("got id:", sender);
         setName("");
         setCountry("");
         setExp("");
@@ -63,26 +102,11 @@ function OfferList() {
   };
   
 
-  useEffect(() => {
-    async function fetchOffers() {
-      try {
-        const response = await fetch("/api/getOffer");
-        const data = await response.json();
-        if (data.success) {
-          setOffers(data.offers);
-        } else {
-          console.error("Failed to fetch offers:", data.message);
-        }
-      } catch (error) {
-        console.error("Error fetching offers:", error);
-      }
-    }
 
-    fetchOffers();
-  }, []);
 
   return (
     <div className="w-1/2">
+      <h1 className="text-slate-100"> User id: {sender}</h1>
       <h1 className="text-3xl text-slate-200">Offers</h1>
       <ul className="">
         {offers.map((offer) => (
