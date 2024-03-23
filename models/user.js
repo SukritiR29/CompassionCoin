@@ -27,6 +27,12 @@ const userSchema = new Schema(
           type: Schema.Types.ObjectId,
           ref: "Offer",
         },
+
+        sender: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
         name: {
           type: String,
           required: true,
@@ -49,8 +55,7 @@ const userSchema = new Schema(
           default: "pending",
         },
       },
-    ]
-    
+    ],
   },
   { timestamps: true }
 );
