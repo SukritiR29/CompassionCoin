@@ -2,37 +2,66 @@ import React, { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
 
 function AdminApplication() {
-  const [applications, setApplications] = useState([]);
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sender, setSender] = useState(null);
+  const [appliedOffers, setAppliedOffers] = useState([]);
+  const [allOffers, setAllOffers] = useState([]); // Assuming you have access to all offers
+
 
   useEffect(() => {
-    const fetchApplications = async () => {
+      async function fetchOffers() {
       try {
-        const response = await fetch("/api/getApplications");
-        const data = await response.json();
-        if (data.success) {
-          setApplications(data.applications);
-        } else {
-          setError(data.message);
-        }
+          if (status === 'authenticated') {
+          const userEmail = session.user.email;
+          console.log("User Email:", userEmail);
+
+          // Fetch the user document based on the email
+          const userResponse = await fetch(`/api/getUser?email=${userEmail}`);
+          const userData = await userResponse.json();
+          console.log("User Data:", userData);
+
+          if (userData.success && userData.user) {
+              const currentUser = userData.user;
+              console.log("Current User ID:", currentUser._id); // Print the user ID in the console
+              setSender(currentUser._id);
+
+              // If appliedOffer is an array in the user document, you can directly set it in state
+              setAppliedOffers(currentUser.appliedOffer || []);
+              console.log("Applied Offers:", currentUser.appliedOffer); // Log the appliedOffer array
+
+          } else {
+              console.error("User not found or no applied offers for the user");
+          }
+          }
+
+          // Fetch other offers
+          const offerResponse = await fetch("/api/getOffer");
+          const offerData = await offerResponse.json();
+          if (offerData.success) {
+              setAllOffers(offerData.offers);
+          } else {
+              console.error("Failed to fetch offers:", offerData.message);
+          }
       } catch (error) {
-        setError("An error occurred while fetching applications");
+          console.error("Error fetching offers:", error);
       } finally {
-        setLoading(false);
+          setLoading(false);
       }
-    };
-
-    fetchApplications();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  fetchOffers();
+}, [status, session]);
+
+  if (status === 'loading' || loading) {
+      return <div>Loading...</div>;
   }
+
+  if (status === 'error' || error) {
+      return <div>Error: {error}</div>;
+  }
+
 
   return (
     <div className="text-slate-100">
@@ -48,15 +77,24 @@ function AdminApplication() {
           </tr>
         </thead>
         <tbody>
-          {applications.map((application) => (
-            <tr key={application._id}>
-              <td>{application.name}</td>
-              <td>{application.country}</td>
-              <td>{application.exp}</td>
-              <td>{application.approach}</td>
-              <td>{application.status}</td>
-            </tr>
-          ))}
+        {appliedOffers.map((appliedOffer) => {
+    const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
+    console.log("appliedOffer.offerId:", appliedOffer.offerId);
+    console.log("allOffers:", allOffers);
+    console.log("correspondingOffer:", correspondingOffer);
+    if (correspondingOffer) {
+        return (
+            <li key={appliedOffer._id}>
+                <p>Offer ID: {appliedOffer.offerId}</p>
+                <p>Offer: {correspondingOffer.offer}</p>
+                <p>Name: {appliedOffer.name}</p>
+                <p>Country: {appliedOffer.country}</p>
+                <p>Status: {appliedOffer.status}</p>
+            </li>
+        );
+    }
+    return null;
+})}
         </tbody>
       </table>
     </div>
