@@ -10,14 +10,14 @@ export async function GET(req) {
     const users = await User.find();
 
     // Extract all submitted applications from all users
-    const responses = users.flatMap((user) => user.appliedOffer);
+    const applications = users.flatMap((user) => user.appliedOffer);
 
-    return NextResponse.json({ success: true, responses });
+    return NextResponse.json({ success: true, applications });
   } catch (error) {
-    console.error("Error fetching submitted responses:", error);
+    console.error("Error fetching applications:", error);
 
     return NextResponse.json(
-      { message: "An error occurred while fetching submitted responses" },
+      { message: "An error occurred while fetching applications" },
       { status: 500 }
     );
   }
