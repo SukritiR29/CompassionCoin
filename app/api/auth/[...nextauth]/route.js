@@ -27,10 +27,10 @@ const authOptions = {
             return null;
           }
 
-          if (user.role !== role){
+          if (user.role !== role) {
             return null;
           }
-           return { ...user.toObject(), role };
+          return { ...user.toObject(), role, id: user._id };
         } catch (error) {
           console.log(error);
         }
