@@ -21,6 +21,13 @@ const userSchema = new Schema(
       default: "User",
     },
 
+    createdOffers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Offer",
+      }
+    ],
+
     appliedOffer: [
       {
         offerId: {
@@ -57,6 +64,7 @@ const userSchema = new Schema(
       },
     ],
   },
+  
   { timestamps: true }
 );
 
