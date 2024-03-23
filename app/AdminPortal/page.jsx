@@ -72,7 +72,7 @@ const Page = () => {
     <div className='bg-slate-900 h-screen '>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4' />
-        <AdminApplication/>
+        <AdminApplication offers={offers}/>
         <div className="border border-opacity-20 border-slate-200 rounded  w-1/2 p-2 m-4 ">
             <h1 className='text-slate-300 text-3xl font-sans mb-2 pl-4'>Compassion Coin</h1>
             <div className="">
