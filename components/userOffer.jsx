@@ -19,7 +19,7 @@ import { useSession } from 'next-auth/react';
 function OfferList() {
   const [offers, setOffers] = useState([]);
   const { data: session, status } = useSession();
-  const [useremail, setUserEmail] = useState([]);
+  const [usermail, setUserEmail] = useState([]);
   const [sender, setSender] = useState([]);
   const initialFocusRef = React.useRef()
 
