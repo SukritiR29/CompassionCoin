@@ -39,9 +39,9 @@ const LoginForm = () => {
 };
 
     return (
-        <div className=' pr-10 pl-10 justify-end rounded-xl bg-slate-900 bg-opacity-50'>
-            <div className='text-slate-300'>
-                <h1 className='text-slate-300 text-3xl text-center font-sans mb-2'>Compassion Coin</h1>
+        <div className=' pr-2 pl-2 justify-end rounded-xl bg-slate-900 bg-opacity-70 pt-5 border border-slate-800'>
+            <div className='text-slate-300 p-1 pt-4'>
+                <h1 className='text-slate-300 text-2xl  text-center font-sans mb-2 '>COMPASSION COIN</h1>
                 {/* <p className='text-xs text-center '>AI art by the people, for the people.</p> */}
             </div>
             <div className='p-3 text-slate-300'>
@@ -64,13 +64,13 @@ const LoginForm = () => {
                             </div>
                         </div>
 
-                        <div className='text-center items-center justify-center mt-8'>
+                        <div className='text-center items-center justify-center mt-4'>
                             <button className='bg-pink-600 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-sm'>Login</button>
                             
                         </div>
                     </form>
-                    <div className='text-sm text-slate-300 mt-10 text-center'>
-                        <h3 className=''>Do not have an account? <Link href={'/'} className='text-blue-500'> Register </Link> </h3>
+                    <div className='text-sm text-slate-300 mt-4 mb-4 text-center'>
+                        <h3 className=''>Do not have an account? <Link href={'/'} className='text-blue-400'> Register </Link> </h3>
                     </div>
                 </div>
             </div>
