@@ -27,20 +27,31 @@ export async function POST(req) {
       status: "pending", // Initial status of the application
     };
 
-    // Find the user who created the offer
-    const receiver = await User.findOneAndUpdate(
+    // Find the user who created the offer and update their applied offers
+    const receiverOfferCreator = await User.findOneAndUpdate(
       { _id: offer.userId },
       { $push: { appliedOffer: application } },
       { new: true }
     );
 
-    if (!receiver) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    if (!receiverOfferCreator) {
+      return NextResponse.json({ message: "User who created the offer not found" }, { status: 404 });
+    }
+
+    // Find the user who applied and update their applied offers
+    const receiverApplicant = await User.findOneAndUpdate(
+      { _id: sender },
+      { $push: { appliedOffer: application } },
+      { new: true }
+    );
+
+    if (!receiverApplicant) {
+      return NextResponse.json({ message: "User who applied not found" }, { status: 404 });
     }
 
     // Send a message or notification to the user who created the offer
     console.log(
-      `Sending message to ${receiver.email}: Application received for offer "${offer.offer}"`
+      `Sending message to ${receiverOfferCreator.email}: Application received for offer "${offer.offer}"`
     );
 
     // You can implement actual logic here to send a message/notification to the user
