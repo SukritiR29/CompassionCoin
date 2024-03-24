@@ -68,12 +68,12 @@ const SignupForm = () => {
     
 
   return (
-    <div className=' pr-10 pl-10 justify-end rounded-xl bg-slate-900 bg-opacity-50'>
-        <div className='text-slate-300'>
-            <h1 className='text-slate-300 text-3xl text-center font-sans mb-2'>Compassion Coin</h1>
+    <div className=' pr-2 pl-2 justify-end rounded-xl bg-slate-900 bg-opacity-70 border border-slate-800'>
+            <div className='text-slate-300 p-2 pt-4'>
+        <h1 className='text-slate-300 text-2xl  text-center font-sans pt-4 '>COMPASSION COIN</h1>
             {/* <p className='text-xs text-center '>AI art by the people, for the people.</p> */}
         </div>
-        <div className='p-3 text-slate-300'>
+        <div className='pl-3 pr-3 text-slate-300'>
             <h2 className='text-lg mb-1 text-center'>Sign Up</h2>
             <div className='w-max ml-5 mr-5'>
             <form onSubmit={handleSubmit}>
@@ -119,20 +119,8 @@ const SignupForm = () => {
             </div>
 
             </div>
-  
-            {/* <div className='flex justify-start gap-10 m-2'>
-                <button className={`bg-blue-100 text-slate-800 p-1 mb-1 pr-4 pl-4 rounded-lg text-sm ${
-                    role === 'Admin' ? "bg-blue-400" : ""
-                }`}
-                onClick={() => setRole("Admin")}>Admin</button>
-                <p>or</p>
-                 <button className={`bg-blue-100 text-slate-800 p-1 mb-1 pr-4 pl-4 rounded-lg text-sm ${
-                    role === 'User' ? "bg-blue-400" : ""
-                }`}
-                onClick={() => setRole("User")}>User</button>
-            </div> */}
 
-            <div className='text-center items-center justify-center mt-8'>
+            <div className='text-center items-center justify-center mt-4'>
             <button className='bg-pink-600 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-sm'>Sign up</button>
             {error && (
             <div className='bg-red-500 p-1 text-sm flex justify-center rounded-md mt-3'>
@@ -146,8 +134,8 @@ const SignupForm = () => {
             </div>
         </div>
 
-        <div className='text-sm text-slate-300 mt-1 text-center'>
-            <h3>Already have an account? <Link href="/login" className='text-blue-500'>Login</Link> </h3>
+        <div className='text-sm text-slate-300 mt-4 mb-6 text-center'>
+            <h3>Already have an account? <Link href="/login" className='text-blue-400'>Login</Link> </h3>
 
         </div>
     </div>
