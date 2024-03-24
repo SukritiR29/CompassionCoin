@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import AdminSide from '@/components/AdminSide';
 import AdminOffer from '@/components/AdminOffer';
 import { useSession } from 'next-auth/react';
-import AdminDisplay from '@/components/AdminDisplay';
 import AdminApplication from '@/components/AdminApplication';
+import Nav from "@/components/nav";
 
 
 const Page = () => {
@@ -69,16 +69,24 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-slate-900 h-screen '>
+    <div className='bg-gradient-to-t from-purple-950 via-violet-950 to-gray-950 h-max '>
+      <Nav/>
       <div className='flex'>
-        <AdminSide className='mt-4 ml-4 mb-4' />
-        <AdminApplication offers={offers}/>
+        {/* <AdminSide className='mt-4 ml-4 mb-4' /> */}
         <div className="border border-opacity-20 border-slate-200 rounded  w-1/2 p-2 m-4 ">
-            <h1 className='text-slate-300 text-3xl font-sans mb-2 pl-4'>Compassion Coin</h1>
+          <div className='flex gap-20'>
+            <h1 className='text-slate-900 text-3xl font-sans m-4 ml-0 mr-20 pl-4'>Offers</h1>
+            <div className=' m-4 justify-end flex items-end ml-20'>
+          <button className='text-sm text-slate-200 bg-blue-500 p-2 rounded' onClick={handleAddOfferClick}>
+            {showAdminOffer ? 'Close Offer -' : 'Add Offer +'}
+          </button>
+          {showAdminOffer && <AdminOffer />}
+        </div>
+        </div>
             <div className="">
             <ul className="">
         {offers.map((offer) => (
-          <li key={offer._id} className="border border-opacity-20 border-slate-200 rounded m-4 text-slate-200 ">
+          <li key={offer._id} className="border border-opacity-20 border-slate-200 rounded m-4 text-slate-900 ">
             <h2>{offer.offer}</h2>
             <p>{offer.description}</p>
             <p>{offer.firm}</p>
@@ -90,11 +98,8 @@ const Page = () => {
             </div>
      
     </div>
-        <div className='m-4 justify-end'>
-          <button className='text-sm text-slate-200 bg-blue-500 p-2 rounded' onClick={handleAddOfferClick}>
-            {showAdminOffer ? 'Close Offer -' : 'Add Offer +'}
-          </button>
-          {showAdminOffer && <AdminOffer />}
+        <div>
+        <AdminApplication offers={offers}/>
         </div>
       </div>
     </div>
