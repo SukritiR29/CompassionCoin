@@ -8,6 +8,8 @@ function AdminApplication() {
   const [sender, setSender] = useState(null);
   const [appliedOffers, setAppliedOffers] = useState([]);
   const [allOffers, setAllOffers] = useState([]); // Assuming you have access to all offers
+  const [adminApplications, setAdminApplications] = useState([]);
+
 
 
   useEffect(() => {
@@ -54,6 +56,40 @@ function AdminApplication() {
   fetchOffers();
 }, [status, session]);
 
+const handleStatusChange = async (applicationId, newStatus) => {
+  try {
+      // Make a request to update the status of the application
+      const response = await fetch(`/api/adminApplications/${applicationId}`, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: newStatus })
+      });
+      if (response.ok) {
+          // Update the status of the application in the UI
+          setAdminApplications(prevApplications => prevApplications.map(application => {
+              if (application._id === applicationId) {
+                  return { ...application, status: newStatus };
+              }
+              return application;
+          }));
+      } else {
+          throw new Error('Failed to update application status');
+      }
+  } catch (error) {
+      console.error('Error updating application status:', error);
+  }
+};
+
+if (status === 'loading' || loading) {
+  return <div>Loading...</div>;
+}
+
+if (status === 'error' || error) {
+  return <div>Error: {error}</div>;
+}
+
   if (status === 'loading' || loading) {
       return <div>Loading...</div>;
   }
@@ -90,7 +126,12 @@ function AdminApplication() {
                 <p>Name: {appliedOffer.name}</p>
                 <p>Country: {appliedOffer.country}</p>
                 <p>Status: {appliedOffer.status}</p>
-            </li>
+                                {appliedOffer.status === 'pending' && (
+                                    <div>
+                                        <button onClick={() => handleStatusChange(appliedOffer._id, 'accepted')}>Accept</button>
+                                        <button onClick={() => handleStatusChange(appliedOffer._id, 'rejected')}>Reject</button>
+                                    </div>
+                                )}            </li>
         );
     }
     return null;
