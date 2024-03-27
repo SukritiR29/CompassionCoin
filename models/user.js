@@ -40,6 +40,11 @@ const userSchema = new Schema(
           ref: "User",
           required: true,
         },
+
+        email: {
+          type: String,
+          required: true,
+        },
         name: {
           type: String,
           required: true,
