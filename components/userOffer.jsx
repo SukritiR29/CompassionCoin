@@ -22,7 +22,7 @@ function OfferList() {
   const [usermail, setUserEmail] = useState([]);
   const [sender, setSender] = useState([]);
   const initialFocusRef = React.useRef()
-
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [exp, setExp] = useState("");
@@ -74,6 +74,7 @@ function OfferList() {
         body: JSON.stringify({
           offerId,
           name,
+          email,
           country,
           exp,
           approach,
@@ -84,7 +85,9 @@ function OfferList() {
         // Application submitted successfully, show success message
         console.log("Application submitted successfully!");
         console.log("got id:", sender);
+        console.log("got email:", email);
         setName("");
+        setEmail("");
         setCountry("");
         setExp("");
         setApproach("");
@@ -137,6 +140,8 @@ function OfferList() {
            <p className="mb-3">{offer.description}</p>
            <p className="text-sm m-1">Name:</p>
            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name:" className="text-xs p-1 rounded m-1" />
+           <p className="text-sm m-1">Email:</p>
+           <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email:" className="text-xs p-1 rounded m-1" />
            <div className="flex flex-wrap">
             <div>
             <p className="text-sm m-1">Country</p>
