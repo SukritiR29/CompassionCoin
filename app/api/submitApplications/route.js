@@ -4,7 +4,7 @@ import AddOffer from "../../../models/addOffer";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { offerId, name, country, exp, approach, sender } = await req.json();
+  const { offerId, name, country, exp, approach, sender, email } = await req.json();
 
   try {
     await connectMongoDB();
@@ -21,6 +21,7 @@ export async function POST(req) {
       offerId,
       sender,
       name,
+      email,
       country,
       exp,
       approach,
