@@ -6,6 +6,8 @@ import AdminOffer from '@/components/AdminOffer';
 import { useSession } from 'next-auth/react';
 import AdminApplication from '@/components/AdminApplication';
 import Nav from "@/components/nav";
+import { MdOutlineLocalOffer } from "react-icons/md";
+
 
 
 const Page = () => {
@@ -69,33 +71,42 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-gradient-to-t from-purple-950 via-violet-950 to-gray-950 h-max '>
+    <div className='bg-gray-950 h-max '>
       <Nav/>
       <div className='flex'>
-        {/* <AdminSide className='mt-4 ml-4 mb-4' /> */}
-        <div className="border border-opacity-20 border-slate-200 rounded  w-1/2 p-2 m-4 ">
-          <div className='flex gap-20'>
-            <h1 className='text-slate-900 text-3xl font-sans m-4 ml-0 mr-20 pl-4'>Offers</h1>
-            <div className=' m-4 justify-end flex items-end ml-20'>
-          <button className='text-sm text-slate-200 bg-blue-500 p-2 rounded' onClick={handleAddOfferClick}>
-            {showAdminOffer ? 'Close Offer -' : 'Add Offer +'}
-          </button>
-          {showAdminOffer && <AdminOffer />}
+        <AdminSide className='mt-4 ml-4 mb-4 w-1/4' />
+        <div className="border border-opacity-20 bg-gray-950 border-slate-200  w-1/2  p-2 m ">
+          <div className='flex justify-between '>
+            <h1 className='text-slate-300 text-lg  text-center font-sans p-4 uppercase font-bold flex'>Offers <MdOutlineLocalOffer className='text-slate-300 text-lg  text-center m-1'/></h1>
+            <div className='m-4 justify-end flex items-end ml-20' style={{ position: 'relative' }}>
+  <button
+    className='text-sm w-max text-slate-200 bg-purple-600 p-2 rounded'
+    onClick={handleAddOfferClick}
+    style={{ position: 'absolute', top: '0', right: '0' }}
+  >
+    {showAdminOffer ? 'Close Offer -' : 'Add Offer +'}
+  </button>
+  {showAdminOffer && <AdminOffer />}
+</div>
+
         </div>
+        <div className="flex flex-wrap">
+  {offers.map((offer) => (
+    <div key={offer._id} className="block w-64  m-1 mt-4 flex flex-wrap justify-between p-3 bg-white border  border-gray-200 rounded-lg shadow text-xs">
+      <div className="w-max">
+        <h2 className="">{offer.offer}</h2>
+        <p>{offer.description}</p>
+        <p>{offer.firm}</p>
+        <p>{offer.worth}</p>
+        <p>{offer.userEmail}</p>
+        <div className="">
+          <button className="">Buy Now</button>
         </div>
-            <div className="">
-            <ul className="">
-        {offers.map((offer) => (
-          <li key={offer._id} className="border border-opacity-20 border-slate-200 rounded m-4 text-slate-900 ">
-            <h2>{offer.offer}</h2>
-            <p>{offer.description}</p>
-            <p>{offer.firm}</p>
-            <p>{offer.worth}</p>
-            <p>{offer.userEmail}</p>
-          </li>
-        ))}
-      </ul>
-            </div>
+      </div>
+    </div>
+  ))}
+</div>
+
      
     </div>
         <div>
