@@ -83,7 +83,8 @@ const handleStatusChange = async (applicationId, newStatus) => {
 };
 
 if (status === 'loading' || loading) {
-  return <div>Loading...</div>;
+  return <div><span className="loading loading-infinity loading-md"></span>
+  </div>;
 }
 
 if (status === 'error' || error) {
@@ -100,7 +101,7 @@ if (status === 'error' || error) {
 
 
   return (
-    <div className="text-slate-100">
+    <div className="text-slate-100 bg-gray-950 w-fit">
       <h1>Submitted Applications</h1>
       <table>
         <thead>
