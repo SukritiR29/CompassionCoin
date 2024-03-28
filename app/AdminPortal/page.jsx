@@ -16,7 +16,11 @@ const Page = () => {
   const [offers, setOffers] = useState([]);
  const [useremail, setUserEmail] = useState([]);
  const [user, setUser] = useState([]);
+ const [expandedOfferId, setExpandedOfferId] = useState(null); 
 
+ const toggleExpansion = (offerId) => {
+  setExpandedOfferId(expandedOfferId === offerId ? null : offerId);
+};
 
 
  useEffect(() => {
@@ -71,7 +75,7 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-gray-950 h-max '>
+    <div className='bg-gray-950 h-screen '>
       <Nav/>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4 w-1/4' />
@@ -91,20 +95,25 @@ const Page = () => {
 
         </div>
         <div className="flex flex-wrap">
-  {offers.map((offer) => (
-    <div key={offer._id} className="block w-64  m-1 mt-4 flex flex-wrap justify-between p-3 bg-white border  border-gray-200 rounded-lg shadow text-xs">
-      <div className="w-max">
-        <h2 className="">{offer.offer}</h2>
-        <p>{offer.description}</p>
-        <p>{offer.firm}</p>
-        <p>{offer.worth}</p>
-        <p>{offer.userEmail}</p>
-        <div className="">
-          <button className="">Buy Now</button>
-        </div>
-      </div>
-    </div>
-  ))}
+            {offers.map((offer) => (
+              <div 
+                key={offer._id} 
+                className={`block w-64  bg-slate-950 pb-6  m-6 mt-4 flex flex-wrap justify-between p-4 bg-white border  border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
+                style={{height: expandedOfferId === offer._id ? 'auto' : '150px'}} 
+                onClick={() => toggleExpansion(offer._id)} 
+              >
+                <div className="w-max">
+                  <h2 className="">{offer.offer}</h2>
+                  <p>{offer.firm}</p>
+                  <p>{offer.worth}</p>
+                  <p>{expandedOfferId === offer._id ? offer.description : offer.description.slice(0, 100) + '...'}</p>
+                  <div className='flex justify-end m-2'>
+                  <button className='p-1 text-xs text-slate-800  pl-4 pr-4  rounded flex justify-end bg-yellow-500 mb-4'>View</button>
+                  </div>
+                
+                </div>
+              </div>
+            ))}
 </div>
 
      
