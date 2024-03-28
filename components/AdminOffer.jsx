@@ -180,7 +180,7 @@ const AdminOffer = () => {
         <div className="">
 
         <div className="flex justify-end">
-  <button className="bg-blue-500 hover:bg-blue-700 h-fit text-white font-semibold  p-2 text-xs rounded justify-center text-center items-center" type="submit">
+  <button className="bg-yellow-600 hover:bg-yellow-900 h-fit text-white font-semibold  p-2 text-xs rounded justify-center text-center items-center" type="submit">
     Submit
   </button>
 </div>
