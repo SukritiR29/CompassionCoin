@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
+import { FaInbox } from "react-icons/fa";
 
 function AdminApplication() {
   const { data: session, status } = useSession();
@@ -9,7 +10,7 @@ function AdminApplication() {
   const [appliedOffers, setAppliedOffers] = useState([]);
   const [allOffers, setAllOffers] = useState([]); // Assuming you have access to all offers
   const [adminApplications, setAdminApplications] = useState([]);
-
+  const [expandedOffer, setExpandedOffer] = useState(null); // New state for tracking expanded offer
 
 
   useEffect(() => {
@@ -82,6 +83,10 @@ const handleStatusChange = async (applicationId, newStatus) => {
   }
 };
 
+const toggleEmail = (offerId) => {
+    setExpandedOffer(expandedOffer === offerId ? null : offerId);
+};
+
 if (status === 'loading' || loading) {
   return <div><span className="loading loading-infinity loading-md"></span>
   </div>;
@@ -91,54 +96,45 @@ if (status === 'error' || error) {
   return <div>Error: {error}</div>;
 }
 
-  if (status === 'loading' || loading) {
-      return <div>Loading...</div>;
-  }
-
-  if (status === 'error' || error) {
-      return <div>Error: {error}</div>;
-  }
-
-
   return (
-    <div className="text-slate-100 bg-gray-950 w-fit">
-      <h1>Submitted Applications</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>Experience</th>
-            <th>Approach</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-        {appliedOffers.map((appliedOffer) => {
-    const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
-    console.log("appliedOffer.offerId:", appliedOffer.offerId);
-    console.log("allOffers:", allOffers);
-    console.log("correspondingOffer:", correspondingOffer);
-    if (correspondingOffer) {
-        return (
-            <li key={appliedOffer._id}>
-                <p>Offer ID: {appliedOffer.offerId}</p>
-                <p>Offer: {correspondingOffer.offer}</p>
-                <p>Name: {appliedOffer.name}</p>
-                <p>Country: {appliedOffer.country}</p>
-                <p>Status: {appliedOffer.status}</p>
-                                {appliedOffer.status === 'pending' && (
-                                    <div>
-                                        <button onClick={() => handleStatusChange(appliedOffer._id, 'accepted')}>Accept</button>
-                                        <button onClick={() => handleStatusChange(appliedOffer._id, 'rejected')}>Reject</button>
-                                    </div>
-                                )}            </li>
-        );
-    }
-    return null;
-})}
-        </tbody>
-      </table>
+    <div className="text-slate-100 bg-gray-950">
+        <div className="flex gap-4 p-4 text-slate-200   pt-6 border w-[26rem] border-slate-800 text-sm">
+        <h1 >Submitted Applications</h1>
+        <FaInbox className="text-md mt-1 "/>
+        </div>
+        <div>
+            {appliedOffers.map((appliedOffer) => {
+                const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
+                console.log("appliedOffer.offerId:", appliedOffer.offerId);
+                console.log("allOffers:", allOffers);
+                console.log("correspondingOffer:", correspondingOffer);
+                if (correspondingOffer) {
+                    return (
+                        <div key={appliedOffer._id} className="email">
+                            <div className="email-header" onClick={() => toggleEmail(appliedOffer._id)}>
+                                <p>Offer: {correspondingOffer.offer}</p>
+                                <p>Name: {appliedOffer.name}</p>
+                            </div>
+                            {expandedOffer === appliedOffer._id && (
+                                <div className="email-details">
+                                    <p>Offer ID: {appliedOffer.offerId}</p>
+                                    <p>Country: {appliedOffer.country}</p>
+                                    {/* <p>Approach: {appliedOffer.approach}</p> */}
+                                    <p>Status: {appliedOffer.status}</p>
+                                    {appliedOffer.status === 'pending' && (
+                                        <div>
+                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'accepted')}>Accept</button>
+                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'rejected')}>Reject</button>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    );
+                }
+                return null;
+            })}
+        </div>
     </div>
   );
 }
