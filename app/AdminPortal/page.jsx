@@ -75,7 +75,7 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-gray-950 h-screen '>
+    <div className='bg-gray-950 h-max '>
       <Nav/>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4 w-1/4' />
@@ -94,11 +94,11 @@ const Page = () => {
 </div>
 
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap mb-10">
             {offers.map((offer) => (
               <div 
                 key={offer._id} 
-                className={`block w-64  bg-slate-950 pb-6  m-6 mt-4 flex flex-wrap justify-between p-4 bg-white border  border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
+                className={`block w-64 m-6 mt-4 flex flex-wrap justify-between p-4  pb-6 bg-gray-950 hover:bg-gray-900 border  border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
                 style={{height: expandedOfferId === offer._id ? 'auto' : '150px'}} 
                 onClick={() => toggleExpansion(offer._id)} 
               >
@@ -106,9 +106,9 @@ const Page = () => {
                   <h2 className="">{offer.offer}</h2>
                   <p>{offer.firm}</p>
                   <p>{offer.worth}</p>
-                  <p>{expandedOfferId === offer._id ? offer.description : offer.description.slice(0, 100) + '...'}</p>
-                  <div className='flex justify-end m-2'>
-                  <button className='p-1 text-xs text-slate-800  pl-4 pr-4  rounded flex justify-end bg-yellow-500 mb-4'>View</button>
+                  <p className='mb-2'>{expandedOfferId === offer._id ? offer.description : offer.description.slice(0, 100) + '...'}</p>
+                  <div className='flex justify-end m-1'>
+                  <button className=' text-xs text-slate-800 h-fit  pl-2 pr-2  rounded flex justify-end bg-yellow-500 mb-4'>View</button>
                   </div>
                 
                 </div>
