@@ -59,31 +59,9 @@ function AdminApplication() {
   fetchOffers();
 }, [status, session]);
 
-const handleStatusChange = async (applicationId, newStatus) => {
-  try {
-      // Make a request to update the status of the application
-      const response = await fetch(`/api/adminApplications/${applicationId}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ status: newStatus })
-      });
-      if (response.ok) {
-          // Update the status of the application in the UI
-          setAdminApplications(prevApplications => prevApplications.map(application => {
-              if (application._id === applicationId) {
-                  return { ...application, status: newStatus };
-              }
-              return application;
-          }));
-      } else {
-          throw new Error('Failed to update application status');
-      }
-  } catch (error) {
-      console.error('Error updating application status:', error);
-  }
-};
+function openEmailClient(emailAddress) {
+    window.location.href = `mailto:${emailAddress}`;
+}
 
 const toggleEmail = (offerId) => {
     setExpandedOffer(expandedOffer === offerId ? null : offerId);
@@ -125,17 +103,31 @@ if (status === 'error' || error) {
                                 
                             </div>
                             {expandedOffer === appliedOffer._id && (
-                                <div className="email-details bg-gray-800">
-                                    <p>Offer ID: {appliedOffer.offerId}</p>
-                                    <p>Country: {appliedOffer.country}</p>
-                                     <p className="">Approach: {appliedOffer.approach}</p>
-                                    <p>Status: {appliedOffer.status}</p>
-                                    {appliedOffer.status === 'pending' && (
-                                        <div>
-                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'accepted')}>Accept</button>
-                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'rejected')}>Reject</button>
+                                <div className="email-details bg-slate-900">
+                                    <div className="p-4 pb-1 border border-gray-800">
+                                        <p className="text-sm mb-1"> {appliedOffer.name} </p>
+                                        <p className="text-xs mb-1 text-slate-400">{appliedOffer.email}</p>
+                                        <p className="text-xs text-slate-400">{correspondingOffer.offer}</p>
+                                       
+
+                                    </div>
+                                    <div className="p-4 text-xs">
+                                        <p className="mb-1">Name: {appliedOffer.name}</p>
+                                    <p className="mb-1">Experience: {appliedOffer.exp}</p>
+                                        
+                                       
+                                        <p className="mb-1">Email: {appliedOffer.email}</p>
+                                    <p className="mb-1">Country: {appliedOffer.country}</p>
+                                       
+                                     <p className="mt-3">Approach: {appliedOffer.approach}</p>
+                                   
+                                     <div className="flex justify-end m-2 mt-6">
+                                        <div className="bg-purple-500 p-2 rounded">
+                                            <button onClick={() => openEmailClient(appliedOffer.email)} >Reply</button>
                                         </div>
-                                    )}
+                                    </div>
+                                    </div>
+                                  
                                 </div>
                             )}
                         </div>
