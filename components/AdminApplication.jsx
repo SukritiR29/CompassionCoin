@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
 import { FaInbox } from "react-icons/fa";
+import { MdArrowDropDownCircle } from "react-icons/md";
+
 
 function AdminApplication() {
   const { data: session, status } = useSession();
@@ -110,16 +112,23 @@ if (status === 'error' || error) {
                 console.log("correspondingOffer:", correspondingOffer);
                 if (correspondingOffer) {
                     return (
-                        <div key={appliedOffer._id} className="email">
-                            <div className="email-header" onClick={() => toggleEmail(appliedOffer._id)}>
-                                <p>Offer: {correspondingOffer.offer}</p>
-                                <p>Name: {appliedOffer.name}</p>
+                        <div key={appliedOffer._id} className="email border border-slate-800 w-[26rem] hover:cursor-pointer">
+                            <div className="email-header p-2 pl-4" onClick={() => toggleEmail(appliedOffer._id)}>
+                                <div className="flex justify-between">
+                                <p className="text-sm ">Offer: {correspondingOffer.offer}</p>
+                                <MdArrowDropDownCircle className="mt-3 mr-6"/>
+                                </div>
+                                <div className="flex gap-4">
+                                <p className="text-xs text-slate-300">Name: {appliedOffer.name}</p>
+                                <p className="text-xs text-slate-300">Experience: {appliedOffer.exp}</p>
+                                </div>
+                                
                             </div>
                             {expandedOffer === appliedOffer._id && (
-                                <div className="email-details">
+                                <div className="email-details bg-gray-800">
                                     <p>Offer ID: {appliedOffer.offerId}</p>
                                     <p>Country: {appliedOffer.country}</p>
-                                    {/* <p>Approach: {appliedOffer.approach}</p> */}
+                                     <p className="">Approach: {appliedOffer.approach}</p>
                                     <p>Status: {appliedOffer.status}</p>
                                     {appliedOffer.status === 'pending' && (
                                         <div>
