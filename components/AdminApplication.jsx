@@ -59,8 +59,11 @@ function AdminApplication() {
   fetchOffers();
 }, [status, session]);
 
-function openEmailClient(emailAddress) {
-    window.location.href = `mailto:${emailAddress}`;
+
+
+const openEmailClient = (recipientEmail) => {
+    const mailtoUrl = `mailto:${recipientEmail}`;
+    window.open(mailtoUrl);
 }
 
 const toggleEmail = (offerId) => {

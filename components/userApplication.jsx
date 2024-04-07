@@ -2,6 +2,8 @@
 
     import React, { useState, useEffect } from "react";
     import { useSession } from 'next-auth/react';
+    import { FaCircleDot } from "react-icons/fa6";
+
 
     function UserApplication() {
     const { data: session, status } = useSession();
@@ -65,8 +67,11 @@
     }
 
     return (
-        <div className="text-slate-100">
-            <h1>Applied Offers</h1>
+        <div className="w-1/6 text-slate-100 bg-gray-950 mt-14">
+            <div className="flex m-0 p-3 text-slate-200   pt-4">
+            <h1 className="w-fit">Applied Offers</h1>
+            </div>
+            
             <ul>
             {appliedOffers.map((appliedOffer) => {
     const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
@@ -75,12 +80,12 @@
     console.log("correspondingOffer:", correspondingOffer);
     if (correspondingOffer) {
         return (
-            <li key={appliedOffer._id}>
-                <p>Offer ID: {appliedOffer.offerId}</p>
-                <p>Offer: {correspondingOffer.offer}</p>
-                <p>Name: {appliedOffer.name}</p>
-                <p>Country: {appliedOffer.country}</p>
-                <p>Status: {appliedOffer.status}</p>
+            <li key={appliedOffer._id} className="w-fit mb-6 pl-4">
+                <div className="flex">
+                <FaCircleDot className='text-yellow-500 text-xs mt-1 mr-2'/>
+                <p className="text-sm">Offer: {correspondingOffer.offer}</p>
+                </div>
+                <p className="text-xs ml-6  ">Firm: {correspondingOffer.firm}</p>
             </li>
         );
     }
