@@ -9,7 +9,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('user'); // Default role
-
+    const [error, setError] = useState(null);
    const router = useRouter();
 
    const handleSubmit = async (e) => {
@@ -63,11 +63,16 @@ const LoginForm = () => {
                                 <label htmlFor="user" className='text-sm'>User</label>
                             </div>
                         </div>
-
                         <div className='text-center items-center justify-center mt-4'>
-                            <button className='bg-pink-600 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-sm'>Login</button>
-                            
-                        </div>
+    <button className='bg-pink-600 p-1 pr-4 pl-4 text-slate-300 rounded-lg text-xs'>Login</button>
+    {error && (
+        <div className='bg-red-600 p-1 text-xs flex justify-center rounded-md mt-3'>
+            {error}
+        </div>
+    )}
+</div>
+
+         
                     </form>
                     <div className='text-sm text-slate-300 mt-4 mb-4 text-center'>
                         <h3 className=''>Do not have an account? <Link href={'/'} className='text-blue-400'> Register </Link> </h3>
