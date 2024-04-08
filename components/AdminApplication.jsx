@@ -80,10 +80,10 @@ if (status === 'error' || error) {
 }
 
   return (
-    <div className="text-slate-100 bg-gray-950">
-        <div className="flex gap-4 p-4 text-slate-200   pt-6 border w-[26rem] border-slate-800 text-sm">
-        <h1 >Submitted Applications</h1>
-        <FaInbox className="text-md mt-1 "/>
+    <div className="text-slate-100 bg-blue-950 h-screen mt-14 ">
+        <div className="flex gap-4 p-4 text-slate-200   pt-6 mb-2 shadow border border-gray-500 text-sm">
+        <h1 className='text-md font-bold text-slate-200' > Applications Inbox</h1>
+        <FaInbox className="text-md mt-1 text-slate-200"/>
         </div>
         <div>
             {appliedOffers.map((appliedOffer) => {
@@ -93,28 +93,28 @@ if (status === 'error' || error) {
                 console.log("correspondingOffer:", correspondingOffer);
                 if (correspondingOffer) {
                     return (
-                        <div key={appliedOffer._id} className="email border border-slate-800 w-[26rem] hover:cursor-pointer">
-                            <div className="email-header p-2 pl-4" onClick={() => toggleEmail(appliedOffer._id)}>
-                                <div className="flex justify-between">
+                        <div key={appliedOffer._id} className="email shadow border border-gray-500 border-opacity-30 w-[26rem] hover:cursor-pointer">
+                            <div className="email-header p-2 pl-4 text-slate-200 font-semibold" onClick={() => toggleEmail(appliedOffer._id)}>
+                                <div className="flex justify-between text-slate-200">
                                 <p className="text-sm ">Offer: {correspondingOffer.offer}</p>
-                                <MdArrowDropDownCircle className="mt-3 mr-6"/>
+                                <MdArrowDropDownCircle className="mt-3 mr-6 text-yellow-500"/>
                                 </div>
                                 <div className="flex gap-4">
-                                <p className="text-xs text-slate-300">Name: {appliedOffer.name}</p>
-                                <p className="text-xs text-slate-300">Experience: {appliedOffer.exp}</p>
+                                <p className="text-xs text-slate-200">Name: {appliedOffer.name}</p>
+                                <p className="text-xs text-slate-200">Experience: {appliedOffer.exp}</p>
                                 </div>
                                 
                             </div>
                             {expandedOffer === appliedOffer._id && (
-                                <div className="email-details bg-slate-900">
-                                    <div className="p-4 pb-1 border border-gray-800">
-                                        <p className="text-sm mb-1"> {appliedOffer.name} </p>
-                                        <p className="text-xs mb-1 text-slate-400">{appliedOffer.email}</p>
-                                        <p className="text-xs text-slate-400">{correspondingOffer.offer}</p>
+                                <div className="email-details bg-white">
+                                    <div className="p-4 pb-1 border border-blue-950 border-opacity-20">
+                                        <p className="text-sm mb-1 text-gray-600 "> {appliedOffer.name} </p>
+                                        <p className="text-xs mb-1 text-gray-600">{appliedOffer.email}</p>
+                                        <p className="text-xs text-gray-600">{correspondingOffer.offer}</p>
                                        
 
                                     </div>
-                                    <div className="p-4 text-xs">
+                                    <div className="p-4 text-xs text-gray-800">
                                         <p className="mb-1">Name: {appliedOffer.name}</p>
                                     <p className="mb-1">Experience: {appliedOffer.exp}</p>
                                         
@@ -125,7 +125,7 @@ if (status === 'error' || error) {
                                      <p className="mt-3">Approach: {appliedOffer.approach}</p>
                                    
                                      <div className="flex justify-end m-2 mt-6">
-                                        <div className="bg-purple-500 p-2 rounded">
+                                        <div className="bg-yellow-600 text-white p-2 rounded">
                                             <button onClick={() => openEmailClient(appliedOffer.email)} >Reply</button>
                                         </div>
                                     </div>
