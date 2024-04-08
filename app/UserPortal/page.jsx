@@ -8,12 +8,12 @@ import UserSide from '@/components/UserSide'
 
 const page = () => {
   return (
-    <div className='bg-gray-950  h-max '>
+    <div className='bg-gray-200  h-max overflow-hidden'>
       <Nav/>
       <div className='flex w-screen'>     
         <UserSide className=''/>     
         <OfferList/>
-        <UserApplication className='w-fit'/>
+        <UserApplication className=''/>
       
       </div>
      
