@@ -67,9 +67,9 @@
     }
 
     return (
-        <div className="w-1/6 text-slate-100 bg-gray-950 mt-14">
-            <div className="flex m-0 p-3 text-slate-200   pt-4">
-            <h1 className="w-fit">Applied Offers</h1>
+        <div className="w-1/6 text-slate-100 bg-blue-950 mt-14 shadow">
+            <div className="flex m-0 p-3 text-gray-100 border mb-4   pt-4">
+            <h1 className="w-fit">Applied Programs</h1>
             </div>
             
             <ul>
@@ -83,9 +83,9 @@
             <li key={appliedOffer._id} className="w-fit mb-6 pl-4">
                 <div className="flex">
                 <FaCircleDot className='text-yellow-500 text-xs mt-1 mr-2'/>
-                <p className="text-sm">Offer: {correspondingOffer.offer}</p>
+                <p className="text-sm text-gray-100">Offer: {correspondingOffer.offer}</p>
                 </div>
-                <p className="text-xs ml-6  ">Firm: {correspondingOffer.firm}</p>
+                <p className="text-xs text-gray-100 ml-6  ">Firm: {correspondingOffer.firm}</p>
             </li>
         );
     }
