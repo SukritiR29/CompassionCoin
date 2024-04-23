@@ -23,7 +23,7 @@ const offerSchema = new Schema(
       required: [true, "Worth is required"],
     },
 
-    // Reference to the User document (after $lookup)
+
     userEmail: {
       type: String,
       required: [true, "User email is required"],

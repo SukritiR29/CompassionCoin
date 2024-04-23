@@ -75,16 +75,16 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-gray-950 h-max '>
-      <Nav/>
+    <div className='bg-gray-200 h-full '>
+      <Nav style={{ zIndex: '100' }}/>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4 w-1/4' />
-        <div className="border border-opacity-20 bg-gray-950 border-slate-200  w-1/2  p-2 m ">
+        <div className="border border-opacity-20 bg-gray-200 mt-14 ml-[14rem] shadow border-slate-200  w-[100rem]  p-2 m ">
           <div className='flex justify-between '>
-            <h1 className='text-slate-300 text-lg  text-center font-sans p-4 uppercase font-bold flex'>Offers <MdOutlineLocalOffer className='text-slate-300 text-lg  text-center m-1'/></h1>
+            <h1 className='text-gray-600 font-bold text-lg  text-center font-sans p-4 uppercase font-bold flex'>Offers <MdOutlineLocalOffer className='text-gray-600 text-lg  text-center m-1'/></h1>
             <div className='m-4 justify-end flex items-end ml-20' style={{ position: 'relative' }}>
   <button
-    className='text-sm w-max text-slate-200 bg-purple-600 p-2 rounded'
+    className='text-sm w-max text-gray-600 font-bold bg-yellow-500 p-2 rounded'
     onClick={handleAddOfferClick}
     style={{ position: 'absolute', top: '0', right: '0' }}
   >
@@ -94,19 +94,22 @@ const Page = () => {
 </div>
 
         </div>
-        <div className="flex flex-wrap mb-10">
+        <div className="flex flex-wrap justify-center mb-10">
             {offers.map((offer) => (
               <div 
                 key={offer._id} 
-                className={`block w-64 m-6 mt-4 flex flex-wrap justify-between p-4  pb-6 bg-gray-950 hover:bg-gray-900 border  border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
+                className={`block w-[17rem] m-6 mt-4 flex flex-wrap justify-between p-4  pb-6 bg-white border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
                 style={{height: expandedOfferId === offer._id ? 'auto' : '150px'}} 
                 onClick={() => toggleExpansion(offer._id)} 
               >
                 <div className="w-max">
-                  <h2 className="">{offer.offer}</h2>
-                  <p>{offer.firm}</p>
-                  <p>{offer.worth}</p>
-                  <p className='mb-2'>{expandedOfferId === offer._id ? offer.description : offer.description.slice(0, 100) + '...'}</p>
+                  <h2 className="text-slate-600 text-sm font-bold underline">{offer.offer}</h2>
+                  <div className='flex justify-between'>
+                  <p className='text-slate-600 mt-1'>{offer.firm}</p>
+                  <p className="text-xs bg-blue-950 w-fit p-1 rounded pl-2 pr-2">{offer.worth}</p>
+                  </div>
+                
+                  <p className='mb-2 mt-2 text-slate-700 font-light'>{expandedOfferId === offer._id ? offer.description : offer.description.slice(0, 80) + '.......'}</p>
                   <div className='flex justify-end m-1'>
                   <button className=' text-xs text-slate-800 h-fit  pl-2 pr-2  rounded flex justify-end bg-yellow-500 mb-4'>View</button>
                   </div>

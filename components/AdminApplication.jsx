@@ -59,31 +59,12 @@ function AdminApplication() {
   fetchOffers();
 }, [status, session]);
 
-const handleStatusChange = async (applicationId, newStatus) => {
-  try {
-      // Make a request to update the status of the application
-      const response = await fetch(`/api/adminApplications/${applicationId}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ status: newStatus })
-      });
-      if (response.ok) {
-          // Update the status of the application in the UI
-          setAdminApplications(prevApplications => prevApplications.map(application => {
-              if (application._id === applicationId) {
-                  return { ...application, status: newStatus };
-              }
-              return application;
-          }));
-      } else {
-          throw new Error('Failed to update application status');
-      }
-  } catch (error) {
-      console.error('Error updating application status:', error);
-  }
-};
+
+
+const openEmailClient = (recipientEmail) => {
+    const mailtoUrl = `mailto:${recipientEmail}`;
+    window.open(mailtoUrl);
+}
 
 const toggleEmail = (offerId) => {
     setExpandedOffer(expandedOffer === offerId ? null : offerId);
@@ -99,12 +80,12 @@ if (status === 'error' || error) {
 }
 
   return (
-    <div className="text-slate-100 bg-gray-950">
-        <div className="flex gap-4 p-4 text-slate-200   pt-6 border w-[26rem] border-slate-800 text-sm">
-        <h1 >Submitted Applications</h1>
-        <FaInbox className="text-md mt-1 "/>
+    <div className="text-slate-100 bg-blue-950 h-full mt-14 ">
+        <div className="flex gap-4 p-4 text-slate-200   pt-6 mb-2 shadow border border-gray-500 text-sm">
+        <h1 className='text-md font-bold text-slate-200' > Applications Inbox</h1>
+        <FaInbox className="text-md mt-1 text-slate-200"/>
         </div>
-        <div>
+        <div className="overflow-y-auto h-[calc(100vh - 14rem)]">
             {appliedOffers.map((appliedOffer) => {
                 const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
                 console.log("appliedOffer.offerId:", appliedOffer.offerId);
@@ -112,30 +93,44 @@ if (status === 'error' || error) {
                 console.log("correspondingOffer:", correspondingOffer);
                 if (correspondingOffer) {
                     return (
-                        <div key={appliedOffer._id} className="email border border-slate-800 w-[26rem] hover:cursor-pointer">
-                            <div className="email-header p-2 pl-4" onClick={() => toggleEmail(appliedOffer._id)}>
-                                <div className="flex justify-between">
+                        <div key={appliedOffer._id} className="email shadow border border-gray-500 border-opacity-30 w-[20rem] hover:cursor-pointer">
+                            <div className="email-header p-2 pl-4 text-slate-200 font-semibold" onClick={() => toggleEmail(appliedOffer._id)}>
+                                <div className="flex justify-between text-slate-200">
                                 <p className="text-sm ">Offer: {correspondingOffer.offer}</p>
-                                <MdArrowDropDownCircle className="mt-3 mr-6"/>
+                                <MdArrowDropDownCircle className="mt-3 mr-6 text-yellow-500"/>
                                 </div>
                                 <div className="flex gap-4">
-                                <p className="text-xs text-slate-300">Name: {appliedOffer.name}</p>
-                                <p className="text-xs text-slate-300">Experience: {appliedOffer.exp}</p>
+                                <p className="text-xs text-slate-200">Name: {appliedOffer.name}</p>
+                                <p className="text-xs text-slate-200">Experience: {appliedOffer.exp}</p>
                                 </div>
                                 
                             </div>
                             {expandedOffer === appliedOffer._id && (
-                                <div className="email-details bg-gray-800">
-                                    <p>Offer ID: {appliedOffer.offerId}</p>
-                                    <p>Country: {appliedOffer.country}</p>
-                                     <p className="">Approach: {appliedOffer.approach}</p>
-                                    <p>Status: {appliedOffer.status}</p>
-                                    {appliedOffer.status === 'pending' && (
-                                        <div>
-                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'accepted')}>Accept</button>
-                                            <button onClick={() => handleStatusChange(appliedOffer._id, 'rejected')}>Reject</button>
+                                <div className="email-details bg-white">
+                                    <div className="p-4 pb-1 border border-blue-950 border-opacity-20">
+                                        <p className="text-sm mb-1 text-gray-600 "> {appliedOffer.name} </p>
+                                        <p className="text-xs mb-1 text-gray-600">{appliedOffer.email}</p>
+                                        <p className="text-xs text-gray-600">{correspondingOffer.offer}</p>
+                                       
+
+                                    </div>
+                                    <div className="p-4 text-xs text-gray-800">
+                                        <p className="mb-1">Name: {appliedOffer.name}</p>
+                                    <p className="mb-1">Experience: {appliedOffer.exp}</p>
+                                        
+                                       
+                                        <p className="mb-1">Email: {appliedOffer.email}</p>
+                                    <p className="mb-1">Country: {appliedOffer.country}</p>
+                                       
+                                     <p className="mt-3">Approach: {appliedOffer.approach}</p>
+                                   
+                                     <div className="flex justify-end m-2 mt-6">
+                                        <div className="bg-yellow-600 text-white p-2 rounded">
+                                            <button onClick={() => openEmailClient(appliedOffer.email)} >Reply</button>
                                         </div>
-                                    )}
+                                    </div>
+                                    </div>
+                                  
                                 </div>
                             )}
                         </div>
