@@ -1,6 +1,6 @@
 // pages/api/messages/send.js
 
-import { Message, User } from "../../../models";
+import { Message, User } from "../../models";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
