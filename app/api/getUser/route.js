@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import { connectMongoDB } from "../../../lib/mongodb";
-import User from "../../../models/user";
+import User from "../../models/user";
 import { NextResponse } from "next/server";
 
 // Define the GET handler for the /api/user endpoint
@@ -10,13 +10,13 @@ export async function GET(req) {
     await connectMongoDB();
 
     // Extract the email from the query parameters
-    const url = require('url');
+    const url = require("url");
 
     // Assuming req is your request object
     const parsedUrl = url.parse(req.url, true);
     const email = parsedUrl.query.email;
-    
-    console.log(email); 
+
+    console.log(email);
     // Find the user document by email
     const user = await User.findOne({ email });
 

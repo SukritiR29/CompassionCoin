@@ -1,10 +1,11 @@
 import { connectMongoDB } from "../../../lib/mongodb";
-import User from "../../../models/user";
-import AddOffer from "../../../models/addOffer";
+import User from "../../models/user";
+import AddOffer from "../../models/addOffer";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { offerId, name, country, exp, approach, sender, email } = await req.json();
+  const { offerId, name, country, exp, approach, sender, email } =
+    await req.json();
 
   try {
     await connectMongoDB();
@@ -36,7 +37,10 @@ export async function POST(req) {
     );
 
     if (!receiverOfferCreator) {
-      return NextResponse.json({ message: "User who created the offer not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "User who created the offer not found" },
+        { status: 404 }
+      );
     }
 
     // Find the user who applied and update their applied offers
@@ -47,7 +51,10 @@ export async function POST(req) {
     );
 
     if (!receiverApplicant) {
-      return NextResponse.json({ message: "User who applied not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "User who applied not found" },
+        { status: 404 }
+      );
     }
 
     // Send a message or notification to the user who created the offer
