@@ -1,6 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import { getSession } from "next-auth/react";
-import User from "@/models/user";
+import User from "@/app/models/user";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
@@ -13,13 +13,18 @@ export async function GET(req) {
   try {
     await connectMongoDB();
 
-    const user = await User.findById(session.user._id).populate("appliedOffer.offerId");
+    const user = await User.findById(session.user._id).populate(
+      "appliedOffer.offerId"
+    );
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, appliedOffers: user.appliedOffer });
+    return NextResponse.json({
+      success: true,
+      appliedOffers: user.appliedOffer,
+    });
   } catch (error) {
     console.error("Error fetching applied offers:", error);
 
