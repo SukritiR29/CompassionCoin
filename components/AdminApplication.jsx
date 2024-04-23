@@ -80,12 +80,12 @@ if (status === 'error' || error) {
 }
 
   return (
-    <div className="text-slate-100 bg-blue-950 h-screen mt-14 ">
+    <div className="text-slate-100 bg-blue-950 h-full mt-14 ">
         <div className="flex gap-4 p-4 text-slate-200   pt-6 mb-2 shadow border border-gray-500 text-sm">
         <h1 className='text-md font-bold text-slate-200' > Applications Inbox</h1>
         <FaInbox className="text-md mt-1 text-slate-200"/>
         </div>
-        <div>
+        <div className="overflow-y-auto h-[calc(100vh - 14rem)]">
             {appliedOffers.map((appliedOffer) => {
                 const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
                 console.log("appliedOffer.offerId:", appliedOffer.offerId);
@@ -93,7 +93,7 @@ if (status === 'error' || error) {
                 console.log("correspondingOffer:", correspondingOffer);
                 if (correspondingOffer) {
                     return (
-                        <div key={appliedOffer._id} className="email shadow border border-gray-500 border-opacity-30 w-[26rem] hover:cursor-pointer">
+                        <div key={appliedOffer._id} className="email shadow border border-gray-500 border-opacity-30 w-[20rem] hover:cursor-pointer">
                             <div className="email-header p-2 pl-4 text-slate-200 font-semibold" onClick={() => toggleEmail(appliedOffer._id)}>
                                 <div className="flex justify-between text-slate-200">
                                 <p className="text-sm ">Offer: {correspondingOffer.offer}</p>

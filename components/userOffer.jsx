@@ -140,35 +140,35 @@ function OfferList() {
                   <button className=" bg-yellow-500 text-xs text-white p-1 pl-4 pr-4 rounded mt-4">Apply</button>
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="bg-blue-950 p-4 rounded text-slate-200 mb-10 mt-20 max-w-[30rem] hidden">
+                <PopoverContent className="bg-white shadow border border-blue-950 p-4 rounded text-slate-200 mb-10 mt-20 max-w-[30rem] hidden">
                   <PopoverHeader pt={4} fontWeight='bold' border='0'>
-                    <p className="p-2 text-md border mb-4">Apply to {offer.offer}</p>
+                    <p className="p-2 bg-yellow-500 text-white text-md border mb-4">Apply to {offer.offer}</p>
                   </PopoverHeader>
                   <PopoverArrow className="text-slate-200 bg-slate-100" />
                   <PopoverBody>
-                    <form action="submit" onSubmit={(e) => handleSubmit(e, offer._id)} className="pl-2 pr-2 pb-2  text-sm">
-                      <p className="mb-3 text-xs font-thin mb-2">{offer.description}</p>
+                    <form action="submit" onSubmit={(e) => handleSubmit(e, offer._id)} className="pl-2 pr-2 pb-2 text-blue-950 text-sm">
+                      <p className="mb-3 text-xs text-blue-950 font-light mb-2">{offer.description}</p>
                       <p className="text-sm m-1 text-xs">Name:</p>
-                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name:" className="text-xs p-1 rounded m-1" />
+                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name:" className="text-xs p-1 rounded m-1 bg-slate-200" />
                       <p className="text-sm m-1 text-xs">Email:</p>
-                      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email:" className="text-xs p-1 rounded m-1" />
+                      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email:" className="text-xs p-1 rounded m-1 bg-slate-200" />
                       <div className="flex flex-wrap">
                         <div>
                           <p className="text-xs mt-2 ml-1">Country</p>
-                          <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country:" className="text-xs p-1 rounded m-1 w-3/4" />
+                          <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country:" className="text-xs p-1 rounded m-1 w-3/4 bg-slate-200" />
                         </div>
                         <div>
                           <p className="text-xs mt-2  ml-1">Experience:</p>
-                          <input type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="2 years:" className="text-xs p-1 rounded m-1 w-3/4" />
+                          <input type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="2 years:" className="text-xs p-1 rounded m-1 w-3/4 bg-slate-200" />
                         </div>
                       </div>
                       <p className="text-xs m-2">Your approach:</p>
-                      <textarea type="text" value={approach} onChange={(e) => setApproach(e.target.value)} placeholder="Your approach" className="text-xs p-1 ml-2  rounded w-3/4 mb-2" />
+                      <textarea type="text" value={approach} onChange={(e) => setApproach(e.target.value)} placeholder="Your approach" className="text-xs p-1 ml-2  rounded w-3/4 mb-2 bg-slate-200" />
                     </form>
                   </PopoverBody>
                   <PopoverFooter border='0' display='flex' alignItems='end' justifyContent='space-between' pb={4}>
                     <div className="text-sm m-2 flex justify-center">
-                      <button className="bg-yellow-600 p-1 rounded text-slate-100 m-2 text-xs" onClick={(e) => handleSubmit(e, offer._id)}>Send Application</button>
+                      <button className="bg-blue-950 p-1 rounded text-slate-100 m-2 text-xs" onClick={(e) => handleSubmit(e, offer._id)}>Send Application</button>
                       <PopoverTrigger>
                       <button className="bg-red-700 p-1 pl-2 pr-2 rounded text-slate-100 m-2 text-xs">Close</button>
                       </PopoverTrigger>

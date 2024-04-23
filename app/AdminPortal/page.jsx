@@ -75,8 +75,8 @@ const Page = () => {
   };
 
   return (
-    <div className='bg-gray-200 h-max '>
-      <Nav/>
+    <div className='bg-gray-200 h-full '>
+      <Nav style={{ zIndex: '100' }}/>
       <div className='flex'>
         <AdminSide className='mt-4 ml-4 mb-4 w-1/4' />
         <div className="border border-opacity-20 bg-gray-200 mt-14 ml-[14rem] shadow border-slate-200  w-[100rem]  p-2 m ">
@@ -98,7 +98,7 @@ const Page = () => {
             {offers.map((offer) => (
               <div 
                 key={offer._id} 
-                className={`block w-[15rem] m-6 mt-4 flex flex-wrap justify-between p-4  pb-6 bg-white border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
+                className={`block w-[17rem] m-6 mt-4 flex flex-wrap justify-between p-4  pb-6 bg-white border-yellow-400 text-slate-400 rounded-lg shadow text-xs`}
                 style={{height: expandedOfferId === offer._id ? 'auto' : '150px'}} 
                 onClick={() => toggleExpansion(offer._id)} 
               >
