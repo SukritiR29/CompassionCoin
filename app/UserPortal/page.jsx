@@ -8,7 +8,7 @@ import UserSide from '@/components/UserSide'
 
 const page = () => {
   return (
-    <div className='bg-gray-200  h-max overflow-hidden'>
+    <div className='bg-white  h-max overflow-hidden'>
       <Nav/>
       <div className='flex w-screen'>     
         <UserSide className=''/>     

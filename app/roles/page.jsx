@@ -20,14 +20,14 @@ const Role = () => {
       }, [session, status]);
 
   return (
-<div className='h-screen flex flex-wrap' style={{backgroundImage: 'linear-gradient(to right, #ccc 50%, #fff 50%)'}}>
+<div className='h-screen flex flex-wrap' style={{backgroundImage: 'linear-gradient(to right, #B0E0E6 50%, #fff 50%)'}}>
 
-         < div className=' w-full pt-4 h-14  text-yellow-500  bg-blue-950 shadow flex pt-3 pb-3 flex justify-between'>
-        <h1 className=' pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
+< div className=' w-full pt-2  text-gray-600  bg-gray-100 shadow flex pt-3 pb-3 flex justify-between'>
+        <h1 className='  pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
       <div className='flex'>
     
-      <RxAvatar className='text-md text-stone-200 mr-2'/>
-      <h1 className='mr-10 text-sm font-semibold text-stone-200 uppercase'>{userName}</h1>
+      <RxAvatar className='text-md text-gray-600 mr-2'/>
+      <h1 className='mr-10 text-sm font-semibold text-gray-600 uppercase'>{userName}</h1>
       </div>
     </div>
 
@@ -46,7 +46,7 @@ const Role = () => {
         </ul>
         </div>
         <div className='flex justify-center items-center'>VS</div>
-        <div className='bg-gray-200 mt-6 m-20 mr-[10rem] p-4 w-1/4 rounded rounded-xl shadow'>
+        <div className='bg-pastel-blue mt-6 m-20 mr-[10rem] p-4 w-1/4 rounded rounded-xl shadow'>
         <h1 className=' px-20 text-sm text-gray-600 font-bold flex justify-center uppercase '>Applicants</h1>
         <p className='mt-4 justify-center text-justify text-xs'>Applicants are the users in search for the programs. <br /> The Applicants are individuals who interact with Compassion Coin by submitting forms, applications, or requests for consideration by an organization. 
         <br /> Their privileges are typically limited to the specific actions allowed within the application or submission process.</p>
@@ -59,8 +59,8 @@ const Role = () => {
       </div>
     </div>
 
-    <div className=' bg-blue-950 w-screen m-0'>
-        <footer className="footer footer-center p-4 bg-base-300 text-yellow-500 text-xs flex justify-between">
+    <div className=' bg-gray-200 w-screen m-0'>
+        <footer className="footer footer-center p-4 bg-base-300 text-gray-800 text-xs flex justify-between">
   <aside className='flex justify-between gap-[21rem]'>
     <p>Copyright © 2024 - All right reserved by Brainy Desk LLP</p>
     <br />

@@ -1,62 +1,53 @@
-    "use client"
+import React, { useState, useEffect } from "react";
+import { useSession } from 'next-auth/react';
+import { FaCircleDot } from "react-icons/fa6";
+import { IoIosMail } from "react-icons/io";
+import { SiGoogleforms } from "react-icons/si";
 
-    import React, { useState, useEffect } from "react";
-    import { useSession } from 'next-auth/react';
-    import { FaCircleDot } from "react-icons/fa6";
 
-
-    function UserApplication() {
+function UserApplication() {
     const { data: session, status } = useSession();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sender, setSender] = useState(null);
     const [appliedOffers, setAppliedOffers] = useState([]);
-    const [allOffers, setAllOffers] = useState([]); // Assuming you have access to all offers
-
+    const [allOffers, setAllOffers] = useState([]);
+    const mailColors = ['bg-pastel-blue', 'bg-pastel-red', 'bg-pastel-purple'];
+    let colorIndex = 0;
 
     useEffect(() => {
         async function fetchOffers() {
-        try {
-            if (status === 'authenticated') {
-            const userEmail = session.user.email;
-            console.log("User Email:", userEmail);
+            try {
+                if (status === 'authenticated') {
+                    const userEmail = session.user.email;
+                    const userResponse = await fetch(`/api/getUser?email=${userEmail}`);
+                    const userData = await userResponse.json();
 
-            // Fetch the user document based on the email
-            const userResponse = await fetch(`/api/getUser?email=${userEmail}`);
-            const userData = await userResponse.json();
-            console.log("User Data:", userData);
+                    if (userData.success && userData.user) {
+                        const currentUser = userData.user;
+                        setSender(currentUser._id);
+                        setAppliedOffers(currentUser.appliedOffer || []);
+                    } else {
+                        console.error("User not found or no applied offers for the user");
+                    }
+                }
 
-            if (userData.success && userData.user) {
-                const currentUser = userData.user;
-                console.log("Current User ID:", currentUser._id); // Print the user ID in the console
-                setSender(currentUser._id);
-
-                // If appliedOffer is an array in the user document, you can directly set it in state
-                setAppliedOffers(currentUser.appliedOffer || []);
-                console.log("Applied Offers:", currentUser.appliedOffer); // Log the appliedOffer array
-
-            } else {
-                console.error("User not found or no applied offers for the user");
+                const offerResponse = await fetch("/api/getOffer");
+                const offerData = await offerResponse.json();
+                if (offerData.success) {
+                    setAllOffers(offerData.offers);
+                } else {
+                    console.error("Failed to fetch offers:", offerData.message);
+                }
+            } catch (error) {
+                console.error("Error fetching offers:", error);
+            } finally {
+                setLoading(false);
             }
-            }
-
-            // Fetch other offers
-            const offerResponse = await fetch("/api/getOffer");
-            const offerData = await offerResponse.json();
-            if (offerData.success) {
-                setAllOffers(offerData.offers);
-            } else {
-                console.error("Failed to fetch offers:", offerData.message);
-            }
-        } catch (error) {
-            console.error("Error fetching offers:", error);
-        } finally {
-            setLoading(false);
         }
-    }
 
-    fetchOffers();
-}, [status, session]);
+        fetchOffers();
+    }, [status, session]);
 
     if (status === 'loading' || loading) {
         return <div>Loading...</div>;
@@ -67,33 +58,35 @@
     }
 
     return (
-        <div className="w-1/6 text-slate-100 bg-blue-950 mt-14 shadow">
-            <div className="flex m-0 p-3 text-gray-100 border mb-4   pt-4">
-            <h1 className="w-fit">Applied Programs</h1>
+        <div className="w-1/4 text-slate-100 mt-20 ml-2">
+            <div className="flex gap-4 p-2 pl-4 text-gray-600 mb-2 text-sm">
+                <h1 className="w-fit text-md font-bold">Applied Programs</h1>
             </div>
             
             <ul>
-            {appliedOffers.map((appliedOffer) => {
-    const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
-    console.log("appliedOffer.offerId:", appliedOffer.offerId);
-    console.log("allOffers:", allOffers);
-    console.log("correspondingOffer:", correspondingOffer);
-    if (correspondingOffer) {
-        return (
-            <li key={appliedOffer._id} className="w-fit mb-6 pl-4">
-                <div className="flex">
-                <FaCircleDot className='text-yellow-500 text-xs mt-1 mr-2'/>
-                <p className="text-sm text-gray-100">Offer: {correspondingOffer.offer}</p>
-                </div>
-                <p className="text-xs text-gray-100 ml-6  ">Firm: {correspondingOffer.firm}</p>
-            </li>
-        );
-    }
-    return null;
-})}
+                {appliedOffers.map((appliedOffer) => {
+                    const correspondingOffer = allOffers.find(offer => offer._id === appliedOffer.offerId);
+                    if (correspondingOffer) {
+                        const currentColor = mailColors[colorIndex];
+                        colorIndex = (colorIndex + 1) % mailColors.length;
+
+                        return (
+                            <li key={appliedOffer._id} className="w-fit mb-6 pl-4 flex items-center border w-full m-2 p-2 rounded-full border-gray-600 border-opacity-50">
+                                <div className={`h-10 w-10 mr-2 rounded-full flex items-center justify-center ${currentColor}`}>
+                                    <SiGoogleforms className="text-gray-800 text-lg"/>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-800">Offer: {correspondingOffer.offer}</p>
+                                    <p className="text-xs text-gray-800 ml-2">Firm: {correspondingOffer.firm}</p>
+                                </div>
+                            </li>
+                        );
+                    }
+                    return null;
+                })}
             </ul>
         </div>
     );
 }
 
-    export default UserApplication;
+export default UserApplication;

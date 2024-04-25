@@ -20,16 +20,13 @@ const About = () => {
       }, [session, status]);
 
   return (
-    <div className='bg-gray-200 h-max flex flex-wrap'>
-         < div className=' w-full pt-2 h-14  text-yellow-500  bg-blue-950 shadow flex pt-3 pb-3 flex justify-between'>
-        <h1 className=' pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
+    <div className='bg-white h-max flex flex-wrap'>
+         < div className=' w-full pt-2  text-gray-600  bg-gray-100 shadow flex pt-3 pb-3 flex justify-between'>
+        <h1 className='  pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
       <div className='flex'>
     
-      <RxAvatar className='text-md text-stone-200 mr-2'/>
-      <h1 className='mr-10 text-sm font-semibold text-stone-200 uppercase'>{userName}</h1>
-    
-        
-    
+      <RxAvatar className='text-md text-gray-600 mr-2'/>
+      <h1 className='mr-10 text-sm font-semibold text-gray-600 uppercase'>{userName}</h1>
       </div>
     </div>
 
@@ -48,26 +45,26 @@ const About = () => {
 
         </div>
 
-        <div className='mt-16 p-10 bg-white'>
+        <div className='mt-16 p-10 bg-light-blue'>
         <h1 className='text-3xl font-bold text-gray-600 w-full flex justify-center '>Who do we serve?</h1>
   
         <p className=' text-justify text-sm mt-6 flex justify-center'> Compassion Coin servers verious fields, all with smooth user experience</p>
         <div className='flex justify-center'>
         <ol className='m-6 mt-2 flex flex-wrap w-1/3 justify-between gap-5'>
-          <li className='bg-yellow-500 rounded p-1 px-3 text-xs rounded-xl'>Corporate Foundations</li>
-          <li className='bg-blue-950 text-white rounded p-1 px-3 text-xs rounded-xl'>Government</li>
-          <li className='bg-yellow-500 rounded p-1 px-3 text-xs rounded-xl'>Banks</li>
-          <li className='bg-blue-950 text-white rounded p-1 px-3 text-xs rounded-xl'>Higher Educations</li>
+          <li className='bg-pastel-purple rounded p-1 px-3 text-xs rounded-xl'>Corporate Foundations</li>
+          <li className='bg-pastel-green text-white rounded p-1 px-3 text-xs rounded-xl'>Government</li>
+          <li className='bg-pastel-purple rounded p-1 px-3 text-xs rounded-xl'>Banks</li>
+          <li className='bg-pastel-green text-white rounded p-1 px-3 text-xs rounded-xl'>Higher Educations</li>
           
-          <li className='bg-yellow-500 rounded p-1 px-3 text-xs rounded-xl'>Startups</li>
-          <li className='bg-blue-950 text-white rounded p-1 px-3 text-xs rounded-xl'>Wealth Managers</li>
+          <li className='bg-pastel-purple rounded p-1 px-3 text-xs rounded-xl'>Startups</li>
+          <li className='bg-pastel-green text-white rounded p-1 px-3 text-xs rounded-xl'>Wealth Managers</li>
         </ol>
         </div>
        
         </div>
         </div>
-        <div className='mt-10 bg-blue-950 w-screen'>
-        <footer className="footer footer-center p-4 bg-base-300 text-yellow-500 text-xs flex justify-between">
+        <div className='mt-10 bg-gray-200 w-screen'>
+        <footer className="footer footer-center p-4 bg-base-300 text-gray-800 text-xs flex justify-between">
   <aside className='flex justify-between gap-[21rem]'>
     <p>Copyright © 2024 - All right reserved by Brainy Desk LLP</p>
     <br />

@@ -17,11 +17,11 @@ const Nav = () => {
         }
       }, [session, status]);
   return (
-    < div className='fixed w-full pt-2  text-yellow-500  bg-blue-950 shadow flex pt-3 pb-3 flex justify-between'>
+    < div className='fixed w-full pt-2  text-gray-600  bg-gray-100 shadow flex pt-3 pb-3 flex justify-between'>
         <h1 className=' pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
       <div className='flex'>
-      <RxAvatar className='text-md text-stone-200 mr-2'/>
-      <h1 className='mr-10 text-sm font-semibold text-stone-200 uppercase'>{userName}</h1>
+      <RxAvatar className='text-md text-gray-600 mr-2'/>
+      <h1 className='mr-10 text-sm font-semibold text-gray-600 uppercase'>{userName}</h1>
       </div>
         
     </div>

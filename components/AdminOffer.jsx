@@ -108,7 +108,7 @@ const AdminOffer = () => {
 
   return (
     <div className=''>
-      <form onSubmit={handleSubmit} className="w-full bg-white p-10 rounded mt-20 -ml-20">
+      <form onSubmit={handleSubmit} className="w-full bg-light-blue p-10 rounded mt-20 -ml-20">
         <div className="flex flex-wrap  mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block  uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
@@ -117,7 +117,7 @@ const AdminOffer = () => {
             <input
               onChange={(e) => setOffer(e.target.value)}
               value={offer}
-              className="appearance-none text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none text-xs block w-full bg-white text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="text"
               placeholder="Offer Title"
             />
@@ -128,7 +128,7 @@ const AdminOffer = () => {
           </label>
           <input
             value={userEmail}
-            className="appearance-none block text-xs w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            className="appearance-none block text-xs w-full bg-white text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             type="text"
             placeholder="Email"
             readOnly // Prevent users from editing the email field
@@ -141,7 +141,7 @@ const AdminOffer = () => {
             <input
               onChange={(e) => setFirm(e.target.value)}
               value={firm}
-              className="appearance-none text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none text-xs block w-full bg-white text-gray-700 border border-gray-200 rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               placeholder="Firm Name"
             />
@@ -153,7 +153,7 @@ const AdminOffer = () => {
           <input
               onChange={(e) => setWorth(e.target.value)}
               value={worth}
-              className="appearance-none text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none text-xs block w-full bg-white text-gray-700 border border-gray-200 rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               placeholder="Worth"
             />
@@ -170,7 +170,7 @@ const AdminOffer = () => {
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-              className="appearance-none text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none text-xs block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               placeholder="Description"
             />
@@ -180,7 +180,7 @@ const AdminOffer = () => {
         <div className="">
 
         <div className="flex justify-end">
-  <button className="bg-yellow-500 hover:bg-yellow-900 h-fit text-white font-semibold  p-2 text-xs rounded justify-center text-center items-center" type="submit">
+  <button className="bg-pastel-green hover:bg-yellow-900 h-fit text-white font-semibold  p-2 text-xs rounded justify-center text-center items-center" type="submit">
     Submit
   </button>
 </div>
