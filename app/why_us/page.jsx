@@ -19,13 +19,14 @@ const WhyUs = () => {
 
   return (
     <div className='bg-gray-200 h-screen flex flex-wrap'>
-        < div className=' w-full pt-4 h-14  text-yellow-500  bg-blue-950 shadow flex pt-3 pb-3 flex justify-between'>
-        <h1 className=' pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
+< div className=' w-full pt-2  text-gray-600  bg-gray-100 shadow flex pt-3 pb-3 flex justify-between'>
+        <h1 className='  pl-6 text-sm font-bold  uppercase '>Compassion Coin</h1>
       <div className='flex'>
-      <RxAvatar className='text-md text-stone-200 mr-2'/>
-      <h1 className='mr-10 text-sm font-semibold text-stone-200 uppercase'>{userName}</h1>
-      </div> 
+    
+      <RxAvatar className='text-md text-gray-600 mr-2'/>
+      <h1 className='mr-10 text-sm font-semibold text-gray-600 uppercase'>{userName}</h1>
       </div>
+    </div>
 
       <div className='p-4 felx w-1/2 ml-[20rem] justify-center '>
         <h1 className='text-3xl font-bold text-gray-600 w-full flex justify-center '>Why Us?</h1>
